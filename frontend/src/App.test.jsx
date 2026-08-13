@@ -1,0 +1,108 @@
+import { cleanup, render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest'
+
+import App from './App'
+
+
+describe('portfolio', () => {
+  beforeEach(() => {
+    global.fetch = vi.fn()
+  })
+
+  afterEach(() => cleanup())
+
+  test('renders the recruiter-focused sections and profile links', () => {
+    render(<App />)
+
+    expect(screen.getByRole('heading', { name: /Neo Jedrick Belolo/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'About me' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Skills' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Featured project' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Education' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Contact' })).toBeInTheDocument()
+    const githubLinks = screen.getAllByRole('link', { name: /GitHub profile/i })
+    expect(githubLinks.length).toBeGreaterThan(0)
+    githubLinks.forEach((link) => {
+      expect(link).toHaveAttribute('href', 'https://github.com/kad3nc3')
+    })
+    expect(screen.getByRole('link', { name: /View resume/i })).toHaveAttribute(
+      'href',
+      '/Neo_Jedrick_Belolo_Resume.pdf',
+    )
+    expect(screen.getByRole('link', { name: /Call Neo/i })).toHaveAttribute(
+      'href',
+      'tel:+639206130855',
+    )
+  })
+
+  test('keeps developer.js stable without orbit graphics and places Projects immediately after Home', () => {
+    render(<App />)
+
+    expect(screen.getAllByTestId('terminal-code-line')).toHaveLength(7)
+    expect(screen.queryAllByTestId('terminal-highlight-line')).toHaveLength(0)
+    expect(screen.querySelector('.orbit')).toBeNull()
+    expect(screen.querySelector('.terminal-scan')).toBeNull()
+    expect(screen.queryByTestId('terminal-orbit')).toBeNull()
+    expect(screen.queryByTestId('terminal-orbit-node')).toBeNull()
+    expect(screen.querySelector('.terminal-orbit')).toBeNull()
+
+    const homeSection = document.querySelector('#home')
+    const projectsSection = document.querySelector('#projects')
+    expect(homeSection?.nextElementSibling).toBe(projectsSection)
+
+    const navLinks = screen.getAllByRole('link')
+    const navLabels = navLinks.map((link) => link.textContent?.trim()).filter(Boolean)
+    expect(navLabels.slice(0, 3)).toEqual(['Home', 'Project', 'About'])
+    expect(screen.getByTestId('terminal-border-light')).toBeNull()
+    expect(screen.getByText('developer.js')).toBeInTheDocument()
+    expect(screen.getByAltText('Neo Belolo profile')).toHaveAttribute('src', '/profile.png')
+    expect(screen.queryByText('Neo Belolo', { selector: 'span' })).not.toBeInTheDocument()
+    expect(screen.getByText('LIVE')).toBeInTheDocument()
+    expect(screen.queryByText('React / Flask')).toBeNull()
+    expect(screen.queryByText('Available to learn · build · ship')).toBeNull()
+    expect(screen.getByText('More projects coming soon')).toBeInTheDocument()
+  })
+
+  test('submits the contact form and displays success', async () => {
+    const user = userEvent.setup()
+    global.fetch.mockResolvedValue({
+      ok: true,
+      json: async () => ({ ok: true, message: 'Message sent successfully.' }),
+    })
+    render(<App />)
+
+    await user.type(screen.getByLabelText('Name'), 'Hiring Manager')
+    await user.type(screen.getByLabelText('Email'), 'manager@example.com')
+    await user.type(screen.getByLabelText('Subject'), 'Internship')
+    await user.type(screen.getByLabelText('Message'), 'Let us discuss an internship role.')
+    await user.click(screen.getByRole('button', { name: 'Send message' }))
+
+    expect(global.fetch).toHaveBeenCalledWith(
+      '/api/contact',
+      expect.objectContaining({ method: 'POST' }),
+    )
+    expect(await screen.findByRole('status')).toHaveTextContent('Message sent successfully.')
+  })
+
+  test('shows the server error without clearing the form', async () => {
+    const user = userEvent.setup()
+    global.fetch.mockResolvedValue({
+      ok: false,
+      json: async () => ({
+        ok: false,
+        message: 'Message delivery failed. Please email Neo directly.',
+      }),
+    })
+    render(<App />)
+
+    await user.type(screen.getByLabelText('Name'), 'Hiring Manager')
+    await user.type(screen.getByLabelText('Email'), 'manager@example.com')
+    await user.type(screen.getByLabelText('Subject'), 'Internship')
+    await user.type(screen.getByLabelText('Message'), 'Let us discuss an internship role.')
+    await user.click(screen.getByRole('button', { name: 'Send message' }))
+
+    expect(await screen.findByRole('alert')).toHaveTextContent('Message delivery failed')
+    expect(screen.getByLabelText('Name')).toHaveValue('Hiring Manager')
+  })
+})

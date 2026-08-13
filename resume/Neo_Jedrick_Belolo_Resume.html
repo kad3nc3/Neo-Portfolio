@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Neo Jedrick Belolo - Resume</title>
+  <style>
+    @page { size: A4; margin: 0; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #e7ebef; color: #172333; font-family: Arial, Helvetica, sans-serif; font-size: 9.5pt; line-height: 1.38; }
+    .page { width: 210mm; min-height: 297mm; margin: 0 auto; padding: 13mm 15mm 12mm; background: #fff; }
+    header { padding-bottom: 7mm; border-bottom: 2px solid #1f7a70; }
+    h1 { margin: 0; color: #102439; font-size: 26pt; line-height: 1; letter-spacing: -.6px; }
+    .role { margin: 2.5mm 0 3.5mm; color: #1f7a70; font-size: 11pt; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; }
+    .contact { display: flex; flex-wrap: wrap; gap: 1.5mm 4mm; color: #405267; font-size: 8.7pt; }
+    .contact a { color: inherit; text-decoration: none; }
+    section { margin-top: 5.5mm; }
+    h2 { margin: 0 0 2.4mm; padding-bottom: 1.2mm; border-bottom: 1px solid #c9d5de; color: #102439; font-size: 10.7pt; letter-spacing: 1.1px; text-transform: uppercase; }
+    h3 { margin: 0; color: #172333; font-size: 10pt; }
+    p { margin: 0; }
+    ul { margin: 2mm 0 0; padding-left: 4.5mm; }
+    li { margin: 0 0 1.2mm; padding-left: 1mm; }
+    .summary { color: #2f4256; }
+    .skill-row { display: grid; grid-template-columns: 30mm 1fr; margin-bottom: 1.3mm; }
+    .skill-row strong { color: #102439; }
+    .entry-head { display: flex; align-items: baseline; justify-content: space-between; gap: 5mm; }
+    .date { flex: none; color: #53667a; font-size: 8.7pt; font-weight: 700; }
+    .subhead { margin-top: .6mm; color: #53667a; font-size: 9pt; }
+    .tech { margin-top: 2mm; color: #1f7a70; font-size: 8.8pt; font-weight: 700; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+    @media print { body { background: #fff; } .page { margin: 0; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <h1>NEO JEDRICK BELOLO</h1>
+      <p class="role">Aspiring Full-Stack Web Developer</p>
+      <div class="contact">
+        <a href="mailto:Neojedrick@gmail.com">Neojedrick@gmail.com</a>
+        <span>+63 920 613 0855</span>
+        <span>Binan City, Laguna</span>
+        <a href="https://github.com/kad3nc3">github.com/kad3nc3</a>
+      </div>
+    </header>
+
+    <section>
+      <h2>Professional Summary</h2>
+      <p class="summary">Third-year BS Information Technology student specializing in Web and Mobile Applications, with hands-on academic experience in responsive interfaces, programming fundamentals, and database-backed applications. Building practical full-stack projects with React and Python/Flask. Seeking a web development internship where I can contribute carefully, learn from experienced engineers, and grow through real product work.</p>
+    </section>
+
+    <section>
+      <h2>Technical Skills</h2>
+      <div class="skill-row"><strong>Frontend</strong><span>HTML, CSS, JavaScript, React, Tailwind CSS, responsive design</span></div>
+      <div class="skill-row"><strong>Backend</strong><span>Python, Flask, REST API fundamentals, PHP fundamentals</span></div>
+      <div class="skill-row"><strong>Programming</strong><span>Java, C++, object-oriented programming fundamentals</span></div>
+      <div class="skill-row"><strong>Mobile & Data</strong><span>Dart, Flutter, Kotlin basics, MySQL fundamentals</span></div>
+      <div class="skill-row"><strong>Tools</strong><span>Git, GitHub, Visual Studio Code, Android Studio</span></div>
+    </section>
+
+    <section>
+      <h2>Featured Project</h2>
+      <div class="entry-head">
+        <h3>Full-Stack Developer Portfolio</h3>
+        <span class="date">2026</span>
+      </div>
+      <p class="subhead">Personal project | Source profile: github.com/kad3nc3</p>
+      <ul>
+        <li>Built a responsive single-page portfolio in React and Tailwind CSS with reusable sections, mobile navigation, and accessible interaction patterns.</li>
+        <li>Added scroll-based Framer Motion transitions with reduced-motion support to keep the experience polished without compromising accessibility.</li>
+        <li>Developed a Flask contact API with server-side validation, anti-spam handling, SMTP delivery, safe error responses, and automated tests.</li>
+        <li>Structured the frontend and backend as a documented monorepo that can be run locally and published to GitHub without committing credentials.</li>
+      </ul>
+      <p class="tech">React | JavaScript | Tailwind CSS | Framer Motion | Python | Flask | Pytest | Vitest</p>
+    </section>
+
+    <section>
+      <h2>Relevant Academic Experience</h2>
+      <div class="two-col">
+        <div>
+          <h3>Web & Database Foundations</h3>
+          <ul>
+            <li>Created responsive web pages with HTML and CSS for coursework.</li>
+            <li>Applied PHP and MySQL fundamentals to basic server-side logic, database design, and queries.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Mobile Application Foundations</h3>
+          <ul>
+            <li>Built an academic mobile application using Dart and Flutter.</li>
+            <li>Implemented interface layouts, navigation, and basic application functionality.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <div class="entry-head">
+        <h3>FEU Alabang</h3>
+        <span class="date">2023 - Present</span>
+      </div>
+      <p class="subhead">Bachelor of Science in Information Technology | Specialization in Web and Mobile Applications</p>
+    </section>
+  </main>
+</body>
+</html>
