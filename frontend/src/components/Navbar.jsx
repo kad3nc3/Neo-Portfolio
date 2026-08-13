@@ -38,12 +38,14 @@ export function Navbar() {
       <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8" aria-label="Primary navigation">
         <a href="#home" className="group flex items-center" onClick={() => setOpen(false)} aria-label="Return to home">
           <motion.span
-            className="profile-nav-frame"
+            className="profile-nav-frame profile-nav-swap"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
             transition={{ type: 'spring', stiffness: 320, damping: 22 }}
+            title="Hover to reveal portrait"
           >
-            <img src="/profile.png" alt="Neo Belolo profile" className="profile-nav-image" />
+            <img src="/profile-character.png" alt="Neo Belolo primary profile avatar" className="profile-nav-image profile-nav-image-character" />
+            <img src="/profile.png" alt="Neo Belolo photo revealed on hover" className="profile-nav-image profile-nav-image-real" />
           </motion.span>
         </a>
 
