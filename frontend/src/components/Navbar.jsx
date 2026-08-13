@@ -35,7 +35,7 @@ export function Navbar() {
 
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition duration-500 ${scrolled ? 'nav-scrolled' : ''}`}>
-      <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8" aria-label="Primary navigation">
+      <nav className="mx-auto flex h-24 max-w-7xl items-center justify-between px-5 sm:px-8" aria-label="Primary navigation">
         <a href="#home" className="group flex items-center" onClick={() => setOpen(false)} aria-label="Return to home">
           <motion.span
             className="profile-nav-frame profile-nav-swap"
@@ -44,8 +44,8 @@ export function Navbar() {
             transition={{ type: 'spring', stiffness: 320, damping: 22 }}
             title="Hover to reveal portrait"
           >
-            <img src="/profile-character.png" alt="Neo Belolo primary profile avatar" className="profile-nav-image profile-nav-image-character" />
-            <img src="/profile.png" alt="Neo Belolo photo revealed on hover" className="profile-nav-image profile-nav-image-real" />
+            <img src="/profile-character.png" alt="Neo Jedrick Belolo primary profile avatar" className="profile-nav-image profile-nav-image-character" />
+            <img src="/profile.png" alt="Neo Jedrick Belolo photo revealed on hover" className="profile-nav-image profile-nav-image-real" />
           </motion.span>
         </a>
 

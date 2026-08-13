@@ -181,7 +181,7 @@ function App() {
                 <div className="terminal-ambient-glow" aria-hidden="true" />
                 <div className="terminal-code-layer terminal-code-static space-y-5 p-6 font-mono text-sm leading-7 sm:p-9 sm:text-[15px]">
                   <p data-testid="terminal-code-line"><span className="syntax-muted">01</span> <span className="scan-keyword">const</span> <span className="scan-ident">developer</span> <span className="scan-punct">= {'{'}</span></p>
-                  <p data-testid="terminal-code-line" className="pl-5"><span className="syntax-muted">02</span> <span className="scan-property">name:</span> <span className="scan-string">&apos;Neo Belolo&apos;</span>,</p>
+                  <p data-testid="terminal-code-line" className="pl-5"><span className="syntax-muted">02</span> <span className="scan-property">name:</span> <span className="scan-string">&apos;Neo Jedrick Belolo&apos;</span>,</p>
                   <p data-testid="terminal-code-line" className="pl-5"><span className="syntax-muted">03</span> <span className="scan-property">focus:</span> <span className="scan-string">&apos;Full-stack web&apos;</span>,</p>
                   <p data-testid="terminal-code-line" className="pl-5"><span className="syntax-muted">04</span> <span className="scan-property">learning:</span> <span className="scan-punct">[</span><span className="scan-string">&apos;React&apos;</span>, <span className="scan-string">&apos;Flask&apos;</span><span className="scan-punct">]</span>,</p>
                   <p data-testid="terminal-code-line" className="pl-5"><span className="syntax-muted">05</span> <span className="scan-property">mindset:</span> <span className="scan-string">&apos;Build. Test. Improve.&apos;</span></p>
