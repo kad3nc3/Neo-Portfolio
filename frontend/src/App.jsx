@@ -225,21 +225,21 @@ function App() {
                   <span className="terminal-dot terminal-dot-two" />
                   <span className="terminal-dot terminal-dot-three" />
                 </div>
-                <div className="project-url-pill">flexsolstoragecorp.onrender.com</div>
-                <a href="https://flexsolstoragecorp.onrender.com/" target="_blank" rel="noreferrer" className="project-open-link">Open live <ArrowUpRight size={14} /></a>
+                <div className="project-url-pill">flexsol-storage-corp.vercel.app</div>
+                <a href="https://flexsol-storage-corp.vercel.app/" target="_blank" rel="noreferrer" className="project-open-link">Open live <ArrowUpRight size={14} /></a>
               </div>
               <div className="project-preview-frame">
                 <div className="project-preview-sheen" aria-hidden="true" />
                 <iframe
                   title="Flexsol Storage Corp live website preview"
-                  src="https://flexsolstoragecorp.onrender.com/"
+                  src="https://flexsol-storage-corp.vercel.app/"
                   className="project-iframe"
                   loading="lazy"
                   referrerPolicy="strict-origin-when-cross-origin"
                 />
                 <div className="project-preview-fallback">
                   <p>Live preview may be blocked by the deployed site&apos;s framing policy.</p>
-                  <a href="https://flexsolstoragecorp.onrender.com/" target="_blank" rel="noreferrer" className="button-secondary">Open the live website <ArrowUpRight size={16} /></a>
+                  <a href="https://flexsol-storage-corp.vercel.app/" target="_blank" rel="noreferrer" className="button-secondary">Open the live website <ArrowUpRight size={16} /></a>
                 </div>
               </div>
             </div>
@@ -252,7 +252,7 @@ function App() {
               </div>
               <div className="mt-8 grid gap-3 sm:grid-cols-2">
                 {[
-                  ['Live URL', 'flexsolstoragecorp.onrender.com'],
+                  ['Live URL', 'flexsol-storage-corp.vercel.app'],
                   ['Deployment', 'Render'],
                   ['Format', 'Responsive web experience'],
                   ['Presentation', 'Embedded live preview'],
@@ -264,7 +264,7 @@ function App() {
                 ))}
               </div>
               <div className="mt-8 flex flex-wrap gap-2">{['Full-stack web', 'Render', 'Live preview', 'Responsive UI'].map((item) => <span key={item} className="skill-chip">{item}</span>)}</div>
-              <a href="https://flexsolstoragecorp.onrender.com/" target="_blank" rel="noreferrer" className="mt-8 inline-flex w-fit items-center gap-2 text-sm font-semibold text-white/75 transition hover:text-white">Explore Flexsol Storage Corp <ArrowUpRight size={16} /></a>
+              <a href="https://flexsol-storage-corp.vercel.app/" target="_blank" rel="noreferrer" className="mt-8 inline-flex w-fit items-center gap-2 text-sm font-semibold text-white/75 transition hover:text-white">Explore Flexsol Storage Corp <ArrowUpRight size={16} /></a>
             </div>
           </motion.article>
         </Section>
