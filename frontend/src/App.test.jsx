@@ -107,4 +107,23 @@ describe('portfolio', () => {
     expect(await screen.findByRole('alert')).toHaveTextContent('Message delivery failed')
     expect(screen.getByLabelText('Name')).toHaveValue('Hiring Manager')
   })
+  test('profile hover previews the real photo and clicks toggle the locked portrait', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    const profile = screen.getByRole('button', { name: /toggle profile portrait/i })
+
+    await user.hover(profile)
+    expect(profile).toHaveAttribute('data-profile-state', 'hovering-real')
+
+    await user.click(profile)
+    expect(profile).toHaveAttribute('data-profile-state', 'locked-real')
+
+    await user.click(profile)
+    expect(profile).toHaveAttribute('data-profile-state', 'locked-character')
+
+    await user.unhover(profile)
+    expect(profile).toHaveAttribute('data-profile-state', 'locked-character')
+  })
+
 })

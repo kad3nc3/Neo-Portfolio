@@ -11,6 +11,57 @@ const navigation = [
   ['Contact', 'contact'],
 ]
 
+function ProfileSwitcher() {
+  const [lockedReal, setLockedReal] = useState(false)
+  const [hovering, setHovering] = useState(false)
+  const [suppressPreview, setSuppressPreview] = useState(false)
+
+  const showReal = lockedReal || (hovering && !suppressPreview)
+  const profileState = lockedReal ? 'locked-real' : showReal ? 'hovering-real' : 'locked-character'
+
+  const handleMouseEnter = () => {
+    setHovering(true)
+    if (!lockedReal) setSuppressPreview(false)
+  }
+
+  const handleMouseLeave = () => {
+    setHovering(false)
+    setSuppressPreview(false)
+  }
+
+  const handleToggle = () => {
+    if (lockedReal) {
+      setLockedReal(false)
+      setSuppressPreview(true)
+    } else {
+      setLockedReal(true)
+      setSuppressPreview(false)
+    }
+  }
+
+  return (
+    <motion.button
+      type="button"
+      className={`profile-nav-frame profile-nav-swap ${showReal ? 'profile-nav-show-real' : 'profile-nav-show-character'}`}
+      whileHover={{ scale: 1.06 }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ type: 'spring', stiffness: 320, damping: 22 }}
+      title="Hover to preview portrait. Click to toggle portrait."
+      aria-label="Toggle profile portrait"
+      data-profile-state={profileState}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onFocus={handleMouseEnter}
+      onBlur={handleMouseLeave}
+      onClick={handleToggle}
+    >
+      <span className="profile-nav-glint" aria-hidden="true" />
+      <img src="/profile-character.png" alt="Neo Jedrick Belolo primary profile avatar" className="profile-nav-image profile-nav-image-character" />
+      <img src="/profile.png" alt="Neo Jedrick Belolo photo revealed on hover" className="profile-nav-image profile-nav-image-real" />
+    </motion.button>
+  )
+}
+
 export function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -36,18 +87,7 @@ export function Navbar() {
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition duration-500 ${scrolled ? 'nav-scrolled' : ''}`}>
       <nav className="mx-auto flex h-24 max-w-7xl items-center justify-between px-5 sm:px-8" aria-label="Primary navigation">
-        <a href="#home" className="group flex items-center" onClick={() => setOpen(false)} aria-label="Return to home">
-          <motion.span
-            className="profile-nav-frame profile-nav-swap"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ type: 'spring', stiffness: 320, damping: 22 }}
-            title="Hover to reveal portrait"
-          >
-            <img src="/profile-character.png" alt="Neo Jedrick Belolo primary profile avatar" className="profile-nav-image profile-nav-image-character" />
-            <img src="/profile.png" alt="Neo Jedrick Belolo photo revealed on hover" className="profile-nav-image profile-nav-image-real" />
-          </motion.span>
-        </a>
+        <ProfileSwitcher />
 
         <div className="hidden items-center gap-7 lg:flex">
           {navigation.map(([label, id]) => (
