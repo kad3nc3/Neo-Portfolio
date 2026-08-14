@@ -64,6 +64,8 @@ describe('portfolio', () => {
     expect(screen.queryByText('React / Flask')).toBeNull()
     expect(screen.queryByText('Available to learn · build · ship')).toBeNull()
     expect(screen.getByText('More projects coming soon')).toBeInTheDocument()
+    expect(screen.getByText('Vercel')).toBeInTheDocument()
+    expect(screen.queryByText('Render')).toBeNull()
     const replaySections = screen.getAllByTestId('replay-section')
     expect(replaySections.length).toBeGreaterThanOrEqual(5)
     replaySections.forEach((section) => expect(section).toHaveAttribute('data-replay-on-scroll', 'true'))

@@ -223,3 +223,6 @@ body { margin: 0; min-width: 320px; background: var(--bg); }
 @media (prefers-reduced-motion: reduce) {
   .section-replay::before, .lighting-card::before { animation: none; }
 }
+
+/* Hide external inspection/sidebar injection without affecting the portfolio UI. */
+chatgpt-sidebar { display: none !important; }

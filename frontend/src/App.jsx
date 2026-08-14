@@ -260,7 +260,7 @@ function App() {
               <div className="mt-8 grid gap-3 sm:grid-cols-2">
                 {[
                   ['Live URL', 'flexsol-storage-corp.vercel.app'],
-                  ['Deployment', 'Render'],
+                  ['Deployment', 'Vercel'],
                   ['Format', 'Responsive web experience'],
                   ['Presentation', 'Embedded live preview'],
                 ].map(([label, value]) => (
@@ -270,7 +270,7 @@ function App() {
                   </div>
                 ))}
               </div>
-              <div className="mt-8 flex flex-wrap gap-2">{['Full-stack web', 'Render', 'Live preview', 'Responsive UI'].map((item) => <span key={item} className="skill-chip">{item}</span>)}</div>
+              <div className="mt-8 flex flex-wrap gap-2">{['Full-stack web', 'Vercel', 'Live preview', 'Responsive UI'].map((item) => <span key={item} className="skill-chip">{item}</span>)}</div>
               <a href="https://flexsol-storage-corp.vercel.app/" target="_blank" rel="noreferrer" className="mt-8 inline-flex w-fit items-center gap-2 text-sm font-semibold text-white/75 transition hover:text-white">Explore Flexsol Storage Corp <ArrowUpRight size={16} /></a>
             </div>
           </motion.article>
