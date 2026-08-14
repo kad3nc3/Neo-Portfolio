@@ -166,7 +166,7 @@ function App() {
               onMouseMove={handleCardMove}
               onMouseLeave={resetCard}
             >
-              <motion.div className="code-card hero-terminal" style={{ x: springX, y: springY }}>
+              <motion.div className="code-card hero-terminal lighting-card" style={{ x: springX, y: springY }}>
                 <div className="terminal-header" aria-hidden="true">
                   <div className="flex gap-2">
                     <span className="terminal-dot terminal-dot-one" />
@@ -210,7 +210,7 @@ function App() {
               className="projects-coming-soon"
               initial={reduceMotion ? false : { opacity: 0, x: 10 }}
               whileInView={reduceMotion ? undefined : { opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.6 }}
+              viewport={{ once: false, amount: 0.6 }}
               transition={{ duration: 0.55 }}
             >
               <span>More projects coming soon</span>
@@ -221,7 +221,7 @@ function App() {
             className="project-showcase motion-lift"
             initial={reduceMotion ? false : { opacity: 0, y: 26, scale: 0.985 }}
             whileInView={reduceMotion ? undefined : { opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, amount: 0.18 }}
+            viewport={{ once: false, amount: 0.18 }}
             whileHover={reduceMotion ? undefined : { y: -7 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
@@ -235,7 +235,7 @@ function App() {
                 <div className="project-url-pill">flexsol-storage-corp.vercel.app</div>
                 <a href="https://flexsol-storage-corp.vercel.app/" target="_blank" rel="noreferrer" className="project-open-link">Open live <ArrowUpRight size={14} /></a>
               </div>
-              <div className="project-preview-frame">
+              <div className="project-preview-frame lighting-card">
                 <div className="project-preview-sheen" aria-hidden="true" />
                 <iframe
                   title="Flexsol Storage Corp live website preview"
@@ -279,10 +279,10 @@ function App() {
         <Section id="about" eyebrow="02 / About" title="About me" intro="I care about clear interfaces, dependable code, and learning by building real things.">
           <div className="grid gap-8 lg:grid-cols-[1.1fr_.9fr]">
             <motion.div
-              className="panel-card glass-card motion-lift space-y-5 p-7 text-base leading-8 text-white/60 sm:p-9"
+              className="panel-card glass-card motion-lift lighting-card space-y-5 p-7 text-base leading-8 text-white/60 sm:p-9"
               initial={reduceMotion ? false : { opacity: 0, x: -24 }}
               whileInView={reduceMotion ? undefined : { opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
+              viewport={{ once: false, amount: 0.25 }}
               whileHover={reduceMotion ? undefined : { y: -6 }}
               transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
             >
@@ -298,10 +298,10 @@ function App() {
               ].map(([label, value, Icon], index) => (
                 <motion.div
                   key={label}
-                  className="panel-card glass-card motion-lift flex items-center gap-4 p-5"
+                  className="panel-card glass-card motion-lift lighting-card flex items-center gap-4 p-5"
                   initial={reduceMotion ? false : { opacity: 0, x: 18 }}
                   whileInView={reduceMotion ? undefined : { opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.5 }}
+                  viewport={{ once: false, amount: 0.5 }}
                   whileHover={reduceMotion ? undefined : { x: 6, y: -2 }}
                   transition={{ delay: index * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                 >
@@ -318,10 +318,10 @@ function App() {
             {skillGroups.map(({ icon: Icon, title, skills }, index) => (
               <motion.div
                 key={title}
-                className="skill-card group motion-lift"
+                className="skill-card group motion-lift lighting-card"
                 initial={reduceMotion ? false : { opacity: 0, y: 22, scale: 0.98 }}
                 whileInView={reduceMotion ? undefined : { opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, amount: 0.25 }}
+                viewport={{ once: false, amount: 0.25 }}
                 whileHover={reduceMotion ? undefined : { y: -9, rotateX: 1 }}
                 transition={{ duration: 0.55, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
               >
@@ -340,10 +340,10 @@ function App() {
           <div className="relative border-l border-line pl-7 sm:pl-10">
             <motion.span className="absolute -left-2 top-1 h-4 w-4 rounded-full border-4 border-ink bg-white" animate={reduceMotion ? undefined : { boxShadow: ['0 0 0 0 rgba(255,255,255,.02)', '0 0 0 10px rgba(255,255,255,0)', '0 0 0 0 rgba(255,255,255,.02)'] }} transition={{ duration: 2.4, repeat: Infinity }} />
             <motion.div
-              className="panel-card glass-card motion-lift p-7 sm:p-9"
+              className="panel-card glass-card motion-lift lighting-card p-7 sm:p-9"
               initial={reduceMotion ? false : { opacity: 0, y: 22 }}
               whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.28 }}
+              viewport={{ once: false, amount: 0.28 }}
               whileHover={reduceMotion ? undefined : { y: -5 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
@@ -351,7 +351,7 @@ function App() {
                 <div><p className="eyebrow">FEU Alabang</p><h3 className="mt-3 font-display text-2xl font-bold">Bachelor of Science in Information Technology</h3><p className="mt-2 text-white/50">Specialization in Web and Mobile Applications</p></div>
                 <span className="w-fit rounded-full border border-white/10 px-4 py-2 text-sm text-white/40">2023 — Present</span>
               </div>
-              <div className="mt-7 flex flex-wrap gap-2">{['Web development', 'Mobile applications', 'Programming fundamentals', 'Database fundamentals', 'Networking concepts'].map((item, index) => <motion.span key={item} className="skill-chip motion-chip" initial={reduceMotion ? false : { opacity: 0, y: 8 }} whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.6 }} transition={{ delay: index * 0.05 }}>{item}</motion.span>)}</div>
+              <div className="mt-7 flex flex-wrap gap-2">{['Web development', 'Mobile applications', 'Programming fundamentals', 'Database fundamentals', 'Networking concepts'].map((item, index) => <motion.span key={item} className="skill-chip motion-chip" initial={reduceMotion ? false : { opacity: 0, y: 8 }} whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.6 }} transition={{ delay: index * 0.05 }}>{item}</motion.span>)}</div>
             </motion.div>
           </div>
         </Section>

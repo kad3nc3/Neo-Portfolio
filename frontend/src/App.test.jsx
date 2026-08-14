@@ -64,6 +64,9 @@ describe('portfolio', () => {
     expect(screen.queryByText('React / Flask')).toBeNull()
     expect(screen.queryByText('Available to learn · build · ship')).toBeNull()
     expect(screen.getByText('More projects coming soon')).toBeInTheDocument()
+    const replaySections = screen.getAllByTestId('replay-section')
+    expect(replaySections.length).toBeGreaterThanOrEqual(5)
+    replaySections.forEach((section) => expect(section).toHaveAttribute('data-replay-on-scroll', 'true'))
   })
 
   test('submits the contact form and displays success', async () => {

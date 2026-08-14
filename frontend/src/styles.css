@@ -165,3 +165,61 @@ body { margin: 0; min-width: 320px; background: var(--bg); }
 @keyframes buttonSheen { to { transform: translateX(520%) rotate(18deg); opacity: 0; } }
 @keyframes nameBreathe { 0%, 100% { text-shadow: 0 0 0 rgba(255,255,255,0); } 50% { text-shadow: 0 14px 35px rgba(255,255,255,.05); } }
 @media (prefers-reduced-motion: reduce) { .hero-name-reflective { animation: none; } }
+
+
+/* Replayable scroll + ambient lighting pass */
+.section-replay { position: relative; }
+.section-replay::before {
+  content: '';
+  position: absolute;
+  left: -8vw;
+  right: -8vw;
+  top: 10%;
+  height: 30%;
+  pointer-events: none;
+  background: radial-gradient(circle at 35% 50%, rgba(255,255,255,.045), transparent 52%), radial-gradient(circle at 70% 50%, rgba(255,255,255,.025), transparent 44%);
+  opacity: .55;
+  filter: blur(28px);
+  animation: sectionAmbient 9s ease-in-out infinite;
+}
+.lighting-card { position: relative; isolation: isolate; overflow: hidden; }
+.lighting-card::before {
+  content: '';
+  position: absolute;
+  inset: -35%;
+  z-index: 0;
+  pointer-events: none;
+  background: conic-gradient(from 0deg, transparent 0deg, rgba(255,255,255,.05) 28deg, transparent 58deg, transparent 180deg, rgba(255,255,255,.035) 228deg, transparent 258deg);
+  filter: blur(18px);
+  opacity: .4;
+  animation: lightingSweep 12s linear infinite;
+}
+.lighting-card > * { position: relative; z-index: 1; }
+.lighting-card::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(circle at 18% 10%, rgba(255,255,255,.06), transparent 26%), radial-gradient(circle at 82% 90%, rgba(255,255,255,.04), transparent 24%);
+  opacity: .7;
+}
+.project-showcase.lighting-card::before { animation-duration: 10s; opacity: .55; }
+.skill-card.lighting-card::before { animation-duration: 14s; opacity: .28; }
+.panel-card.lighting-card::before { animation-duration: 16s; opacity: .24; }
+.project-preview-frame.lighting-card::before { animation-duration: 9s; opacity: .45; }
+.button-primary, .button-secondary, .icon-button { transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease; }
+.button-primary:hover, .button-secondary:hover, .icon-button:hover { box-shadow: 0 14px 32px rgba(255,255,255,.06); transform: translateY(-2px); }
+.skill-card:hover, .panel-card:hover, .project-showcase:hover { border-color: rgba(255,255,255,.18); box-shadow: 0 28px 90px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.05); }
+@keyframes lightingSweep {
+  from { transform: rotate(0deg) scale(1); }
+  to { transform: rotate(360deg) scale(1.03); }
+}
+@keyframes sectionAmbient {
+  0%, 100% { transform: translate3d(-1%, 0, 0) scale(1); opacity: .42; }
+  50% { transform: translate3d(2%, -2%, 0) scale(1.03); opacity: .7; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .section-replay::before, .lighting-card::before { animation: none; }
+}
