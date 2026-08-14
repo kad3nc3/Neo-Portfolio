@@ -245,7 +245,7 @@ function App() {
                   referrerPolicy="strict-origin-when-cross-origin"
                 />
                 <div className="project-preview-fallback">
-                  <p>Live preview may be blocked by the deployed site&apos;s framing policy.</p>
+                  <p>The live preview may take a moment to load.</p>
                   <a href="https://flexsol-storage-corp.vercel.app/" target="_blank" rel="noreferrer" className="button-secondary">Open the live website <ArrowUpRight size={16} /></a>
                 </div>
               </div>
@@ -255,7 +255,7 @@ function App() {
               <div>
                 <p className="eyebrow">Flexsol Storage Corp</p>
                 <h3 className="mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">A real deployed build, shown in context.</h3>
-                <p className="mt-5 leading-7 text-white/55">This featured project is presented as a live product instead of a static screenshot. Visitors can see the deployed site inside the portfolio, then open it in a full browser tab for the complete experience.</p>
+                <p className="mt-5 leading-7 text-white/55">A freelance web project developed and deployed for a business, presented here as a live product for direct exploration.</p>
               </div>
               <div className="mt-8 grid gap-3 sm:grid-cols-2">
                 {[
