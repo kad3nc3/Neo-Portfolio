@@ -217,7 +217,14 @@ function App() {
               <ArrowUpRight size={15} aria-hidden="true" />
             </motion.div>
           </div>
-          <motion.article className="project-showcase" whileHover={reduceMotion ? undefined : { y: -5 }} transition={{ duration: 0.35 }}>
+          <motion.article
+            className="project-showcase motion-lift"
+            initial={reduceMotion ? false : { opacity: 0, y: 26, scale: 0.985 }}
+            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.18 }}
+            whileHover={reduceMotion ? undefined : { y: -7 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          >
             <div className="project-preview-shell">
               <div className="project-preview-toolbar">
                 <div className="flex items-center gap-2" aria-hidden="true">
@@ -271,7 +278,14 @@ function App() {
 
         <Section id="about" eyebrow="02 / About" title="About me" intro="I care about clear interfaces, dependable code, and learning by building real things.">
           <div className="grid gap-8 lg:grid-cols-[1.1fr_.9fr]">
-            <motion.div className="panel-card glass-card space-y-5 p-7 text-base leading-8 text-white/60 sm:p-9" whileHover={reduceMotion ? undefined : { y: -5 }} transition={{ duration: 0.3 }}>
+            <motion.div
+              className="panel-card glass-card motion-lift space-y-5 p-7 text-base leading-8 text-white/60 sm:p-9"
+              initial={reduceMotion ? false : { opacity: 0, x: -24 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              whileHover={reduceMotion ? undefined : { y: -6 }}
+              transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            >
               <p>I&apos;m a third-year BSIT student specializing in Web and Mobile Applications. My academic work has given me a foundation in frontend development, programming, mobile interfaces, and relational data.</p>
               <p>I&apos;m now concentrating that foundation on full-stack web development—combining accessible React interfaces with small, practical Python services.</p>
               <p>I&apos;m looking for an internship where I can contribute carefully, learn from experienced engineers, and turn feedback into better software.</p>
@@ -284,9 +298,12 @@ function App() {
               ].map(([label, value, Icon], index) => (
                 <motion.div
                   key={label}
-                  className="panel-card glass-card flex items-center gap-4 p-5"
-                  whileHover={reduceMotion ? undefined : { x: 5 }}
-                  transition={{ delay: index * 0.04, duration: 0.3 }}
+                  className="panel-card glass-card motion-lift flex items-center gap-4 p-5"
+                  initial={reduceMotion ? false : { opacity: 0, x: 18 }}
+                  whileInView={reduceMotion ? undefined : { opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.5 }}
+                  whileHover={reduceMotion ? undefined : { x: 6, y: -2 }}
+                  transition={{ delay: index * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-white/10 bg-white/[.04] text-white"><Icon size={20} /></span>
                   <div><p className="text-xs uppercase tracking-[0.14em] text-white/35">{label}</p><p className="mt-1 font-display font-semibold">{value}</p></div>
@@ -301,9 +318,12 @@ function App() {
             {skillGroups.map(({ icon: Icon, title, skills }, index) => (
               <motion.div
                 key={title}
-                className="skill-card group"
-                whileHover={reduceMotion ? undefined : { y: -7 }}
-                transition={{ duration: 0.28, delay: index * 0.02 }}
+                className="skill-card group motion-lift"
+                initial={reduceMotion ? false : { opacity: 0, y: 22, scale: 0.98 }}
+                whileInView={reduceMotion ? undefined : { opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, amount: 0.25 }}
+                whileHover={reduceMotion ? undefined : { y: -9, rotateX: 1 }}
+                transition={{ duration: 0.55, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
               >
                 <div className="flex items-center gap-3"><span className="skill-icon"><Icon size={20} /></span><h3 className="font-display text-lg font-semibold">{title}</h3></div>
                 <div className="mt-6 flex flex-wrap gap-2">
@@ -319,13 +339,20 @@ function App() {
         <Section id="education" eyebrow="04 / Education" title="Education" intro="Building a broad computing foundation, then applying it to the web.">
           <div className="relative border-l border-line pl-7 sm:pl-10">
             <motion.span className="absolute -left-2 top-1 h-4 w-4 rounded-full border-4 border-ink bg-white" animate={reduceMotion ? undefined : { boxShadow: ['0 0 0 0 rgba(255,255,255,.02)', '0 0 0 10px rgba(255,255,255,0)', '0 0 0 0 rgba(255,255,255,.02)'] }} transition={{ duration: 2.4, repeat: Infinity }} />
-            <div className="panel-card glass-card p-7 sm:p-9">
+            <motion.div
+              className="panel-card glass-card motion-lift p-7 sm:p-9"
+              initial={reduceMotion ? false : { opacity: 0, y: 22 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.28 }}
+              whileHover={reduceMotion ? undefined : { y: -5 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            >
               <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
                 <div><p className="eyebrow">FEU Alabang</p><h3 className="mt-3 font-display text-2xl font-bold">Bachelor of Science in Information Technology</h3><p className="mt-2 text-white/50">Specialization in Web and Mobile Applications</p></div>
                 <span className="w-fit rounded-full border border-white/10 px-4 py-2 text-sm text-white/40">2023 — Present</span>
               </div>
-              <div className="mt-7 flex flex-wrap gap-2">{['Web development', 'Mobile applications', 'Programming fundamentals', 'Database fundamentals', 'Networking concepts'].map((item) => <span key={item} className="skill-chip">{item}</span>)}</div>
-            </div>
+              <div className="mt-7 flex flex-wrap gap-2">{['Web development', 'Mobile applications', 'Programming fundamentals', 'Database fundamentals', 'Networking concepts'].map((item, index) => <motion.span key={item} className="skill-chip motion-chip" initial={reduceMotion ? false : { opacity: 0, y: 8 }} whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.6 }} transition={{ delay: index * 0.05 }}>{item}</motion.span>)}</div>
+            </motion.div>
           </div>
         </Section>
 

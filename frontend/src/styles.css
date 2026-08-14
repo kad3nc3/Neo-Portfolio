@@ -153,3 +153,15 @@ body { margin: 0; min-width: 320px; background: var(--bg); }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+.motion-lift { transform-style: preserve-3d; will-change: transform; }
+.motion-chip { transition: transform .3s ease, border-color .3s ease, background .3s ease, color .3s ease, box-shadow .3s ease; }
+.motion-chip:hover { transform: translateY(-3px) scale(1.03); border-color: rgba(255,255,255,.22); background: rgba(255,255,255,.06); color: rgba(255,255,255,.8); box-shadow: 0 8px 22px rgba(0,0,0,.16); }
+.button-primary, .button-secondary, .icon-button { position: relative; overflow: hidden; }
+.button-primary::after, .button-secondary::after, .icon-button::after { content: ''; position: absolute; inset: -30% auto -30% -35%; width: 28%; transform: translateX(-140%) rotate(18deg); background: linear-gradient(90deg, transparent, rgba(255,255,255,.28), transparent); filter: blur(7px); pointer-events: none; opacity: 0; }
+.button-primary:hover::after, .button-secondary:hover::after, .icon-button:hover::after { opacity: .7; animation: buttonSheen .85s ease forwards; }
+.hero-name-reflective { animation: nameBreathe 6s ease-in-out infinite; }
+.section-title { text-shadow: 0 0 30px rgba(255,255,255,.04); }
+@keyframes buttonSheen { to { transform: translateX(520%) rotate(18deg); opacity: 0; } }
+@keyframes nameBreathe { 0%, 100% { text-shadow: 0 0 0 rgba(255,255,255,0); } 50% { text-shadow: 0 14px 35px rgba(255,255,255,.05); } }
+@media (prefers-reduced-motion: reduce) { .hero-name-reflective { animation: none; } }

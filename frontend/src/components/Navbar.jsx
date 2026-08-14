@@ -16,12 +16,15 @@ function ProfileSwitcher() {
   const [hovering, setHovering] = useState(false)
   const [suppressPreview, setSuppressPreview] = useState(false)
 
-  const showReal = lockedReal || (hovering && !suppressPreview)
-  const profileState = lockedReal ? 'locked-real' : showReal ? 'hovering-real' : 'locked-character'
+  const previewing = hovering && !suppressPreview
+  const showReal = lockedReal ? !previewing : previewing
+  const profileState = lockedReal
+    ? (previewing ? 'preview-character' : 'locked-real')
+    : (previewing ? 'preview-real' : 'locked-character')
 
   const handleMouseEnter = () => {
     setHovering(true)
-    if (!lockedReal) setSuppressPreview(false)
+    setSuppressPreview(false)
   }
 
   const handleMouseLeave = () => {
