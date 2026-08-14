@@ -254,7 +254,7 @@ function App() {
             <div className="project-details">
               <div>
                 <p className="eyebrow">Flexsol Storage Corp</p>
-                <h3 className="mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">A real deployed build, shown in context.</h3>
+                <h3 className="mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">Real deployed build, shown in context.</h3>
                 <p className="mt-5 leading-7 text-white/55">A freelance web project developed and deployed for a business, presented here as a live product for direct exploration.</p>
               </div>
               <div className="mt-8 grid gap-3 sm:grid-cols-2">
