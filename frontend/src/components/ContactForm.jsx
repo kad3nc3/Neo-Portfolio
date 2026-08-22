@@ -1,59 +1,80 @@
 import { useState } from 'react'
-import { ArrowUpRight, Send } from 'lucide-react'
+import { ArrowUpRight, Send, CheckCircle2 } from 'lucide-react'
 
 const initialForm = {
   name: '',
   email: '',
   subject: '',
   message: '',
-  website: '',
 }
 
 export function ContactForm() {
   const [form, setForm] = useState(initialForm)
+  const [status, setStatus] = useState('idle')
 
   const update = ({ target }) => {
     setForm((current) => ({
       ...current,
       [target.name]: target.value,
     }))
+
+    // Hide the previous status when the user edits the form again.
+    if (status !== 'idle') {
+      setStatus('idle')
+    }
   }
 
   const submit = (event) => {
     event.preventDefault()
 
-    if (form.website) {
+    const name = form.name.trim()
+    const email = form.email.trim()
+    const subject = form.subject.trim()
+    const message = form.message.trim()
+
+    if (!name || !email || !subject || !message) {
+      setStatus('error')
       return
     }
 
     const body = [
-      `Name: ${form.name}`,
-      `Email: ${form.email}`,
+      `Name: ${name}`,
+      `Email: ${email}`,
       '',
-      form.message,
+      message,
     ].join('\n')
 
-    const gmailUrl =
-      `https://mail.google.com/mail/?view=cm&fs=1` +
-      `&to=${encodeURIComponent('Neojedrick@gmail.com')}` +
-      `&su=${encodeURIComponent(form.subject)}` +
+    const mailtoUrl =
+      `mailto:Neojedrick@gmail.com` +
+      `?subject=${encodeURIComponent(subject)}` +
       `&body=${encodeURIComponent(body)}`
 
-    window.open(gmailUrl, '_blank', 'noopener,noreferrer')
+    // Trigger the user's configured mail application.
+    window.location.href = mailtoUrl
+
+    // We can confirm that the mail client was requested,
+    // but we cannot know whether the user actually sent the email.
+    setStatus('ready')
   }
 
   return (
-    <form onSubmit={submit} className="panel-card p-6 sm:p-8" noValidate>
+    <form
+      onSubmit={submit}
+      className="panel-card p-6 sm:p-8"
+      noValidate
+    >
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="field-label">
           Name
           <input
             className="field-input"
             name="name"
+            type="text"
+            placeholder="Your name"
             value={form.name}
             onChange={update}
             autoComplete="name"
-            maxLength="80"
+            maxLength={80}
             required
           />
         </label>
@@ -64,10 +85,11 @@ export function ContactForm() {
             className="field-input"
             name="email"
             type="email"
+            placeholder="you@example.com"
             value={form.email}
             onChange={update}
             autoComplete="email"
-            maxLength="254"
+            maxLength={254}
             required
           />
         </label>
@@ -78,9 +100,11 @@ export function ContactForm() {
         <input
           className="field-input"
           name="subject"
+          type="text"
+          placeholder="What would you like to discuss?"
           value={form.subject}
           onChange={update}
-          maxLength="120"
+          maxLength={120}
           required
         />
       </label>
@@ -90,40 +114,64 @@ export function ContactForm() {
         <textarea
           className="field-input min-h-36 resize-y"
           name="message"
+          placeholder="Write your message here..."
           value={form.message}
           onChange={update}
-          minLength="10"
-          maxLength="2000"
+          minLength={10}
+          maxLength={2000}
           required
         />
       </label>
 
-      <label className="absolute -left-[9999px]" aria-hidden="true">
-        Website
-        <input
-          name="website"
-          value={form.website}
-          onChange={update}
-          tabIndex="-1"
-          autoComplete="off"
-        />
-      </label>
-
       <div className="mt-6 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <button className="button-primary" type="submit">
+        <button
+          className="button-primary"
+          type="submit"
+        >
           <Send size={17} />
           Send message
         </button>
 
         <a
-          className="inline-flex items-center gap-1.5 text-sm text-mist hover:text-white"
-          href="https://mail.google.com/mail/?view=cm&fs=1&to=Neojedrick@gmail.com"
-          target="_blank"
-          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 text-sm text-mist transition-colors hover:text-white"
+          href="mailto:Neojedrick@gmail.com"
         >
-          Or email me directly <ArrowUpRight size={15} />
+          Or email me directly
+          <ArrowUpRight size={15} />
         </a>
       </div>
+
+      {status === 'ready' && (
+        <div
+          className="mt-5 flex items-start gap-3 rounded-xl border border-teal/30 bg-teal/10 px-4 py-3 text-sm text-teal"
+          role="status"
+        >
+          <CheckCircle2
+            size={18}
+            className="mt-0.5 shrink-0"
+          />
+
+          <div>
+            <p className="font-medium">
+              Email draft ready
+            </p>
+
+            <p className="mt-1 text-teal/80">
+              Your email application should open with the message
+              prepared. Review it and press Send to deliver it.
+            </p>
+          </div>
+        </div>
+      )}
+
+      {status === 'error' && (
+        <p
+          className="mt-5 rounded-xl border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-300"
+          role="alert"
+        >
+          Please complete all fields before sending your message.
+        </p>
+      )}
     </form>
   )
 }
