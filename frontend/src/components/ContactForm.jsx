@@ -158,7 +158,7 @@ export function ContactForm() {
 
             <p className="mt-1 text-teal/80">
               Your email application should open with the message
-              prepared.Press Send to deliver it.
+              prepared. Press Send to deliver it.
             </p>
           </div>
         </div>
