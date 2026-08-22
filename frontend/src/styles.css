@@ -167,7 +167,7 @@ body { margin: 0; min-width: 320px; background: var(--bg); }
 @media (prefers-reduced-motion: reduce) { .hero-name-reflective { animation: none; } }
 
 
-/* Replayable scroll + ambient lighting pass */
+
 .section-replay { position: relative; }
 .section-replay::before {
   content: '';

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ArrowUpRight, LoaderCircle, Send } from 'lucide-react'
+import { ArrowUpRight, Send } from 'lucide-react'
 
 const initialForm = {
   name: '',
@@ -11,31 +11,35 @@ const initialForm = {
 
 export function ContactForm() {
   const [form, setForm] = useState(initialForm)
-  const [state, setState] = useState({ status: 'idle', message: '' })
 
   const update = ({ target }) => {
-    setForm((current) => ({ ...current, [target.name]: target.value }))
+    setForm((current) => ({
+      ...current,
+      [target.name]: target.value,
+    }))
   }
 
-  const submit = async (event) => {
+  const submit = (event) => {
     event.preventDefault()
-    setState({ status: 'loading', message: '' })
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      })
-      const result = await response.json()
-      if (!response.ok) {
-        const fieldMessage = result.errors && Object.values(result.errors)[0]
-        throw new Error(fieldMessage || result.message || 'Unable to send your message.')
-      }
-      setState({ status: 'success', message: result.message })
-      setForm(initialForm)
-    } catch (error) {
-      setState({ status: 'error', message: error.message })
+
+    if (form.website) {
+      return
     }
+
+    const body = [
+      `Name: ${form.name}`,
+      `Email: ${form.email}`,
+      '',
+      form.message,
+    ].join('\n')
+
+    const gmailUrl =
+      `https://mail.google.com/mail/?view=cm&fs=1` +
+      `&to=${encodeURIComponent('Neojedrick@gmail.com')}` +
+      `&su=${encodeURIComponent(form.subject)}` +
+      `&body=${encodeURIComponent(body)}`
+
+    window.open(gmailUrl, '_blank', 'noopener,noreferrer')
   }
 
   return (
@@ -53,6 +57,7 @@ export function ContactForm() {
             required
           />
         </label>
+
         <label className="field-label">
           Email
           <input
@@ -67,6 +72,7 @@ export function ContactForm() {
           />
         </label>
       </div>
+
       <label className="field-label mt-5">
         Subject
         <input
@@ -78,6 +84,7 @@ export function ContactForm() {
           required
         />
       </label>
+
       <label className="field-label mt-5">
         Message
         <textarea
@@ -90,32 +97,33 @@ export function ContactForm() {
           required
         />
       </label>
+
       <label className="absolute -left-[9999px]" aria-hidden="true">
         Website
-        <input name="website" value={form.website} onChange={update} tabIndex="-1" autoComplete="off" />
+        <input
+          name="website"
+          value={form.website}
+          onChange={update}
+          tabIndex="-1"
+          autoComplete="off"
+        />
       </label>
 
       <div className="mt-6 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <button className="button-primary" type="submit" disabled={state.status === 'loading'}>
-          {state.status === 'loading' ? <LoaderCircle className="animate-spin" size={17} /> : <Send size={17} />}
-          {state.status === 'loading' ? 'Sending…' : 'Send message'}
+        <button className="button-primary" type="submit">
+          <Send size={17} />
+          Send message
         </button>
-        <a className="inline-flex items-center gap-1.5 text-sm text-mist hover:text-white" href="mailto:Neojedrick@gmail.com">
+
+        <a
+          className="inline-flex items-center gap-1.5 text-sm text-mist hover:text-white"
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=Neojedrick@gmail.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Or email me directly <ArrowUpRight size={15} />
         </a>
       </div>
-
-      {state.status === 'success' && (
-        <p role="status" className="mt-5 rounded-xl border border-teal/30 bg-teal/10 px-4 py-3 text-sm text-teal">
-          {state.message}
-        </p>
-      )}
-      {state.status === 'error' && (
-        <p role="alert" className="mt-5 rounded-xl border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-200">
-          {state.message}
-        </p>
-      )}
     </form>
   )
 }
-
