@@ -153,12 +153,12 @@ export function ContactForm() {
 
           <div>
             <p className="font-medium">
-              Email draft ready
+              Your Email Awaits...
             </p>
 
             <p className="mt-1 text-teal/80">
               Your email application should open with the message
-              prepared. Review it and press Send to deliver it.
+              prepared.Press Send to deliver it.
             </p>
           </div>
         </div>
