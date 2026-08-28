@@ -1,0 +1,9 @@
+# Cooperative crawler guidance. This is not access control.
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /backend/
+Disallow: /.env
+Disallow: /.git/
+Disallow: /private/
+Disallow: /admin/

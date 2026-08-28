@@ -8,9 +8,27 @@ const initialForm = {
   message: '',
 }
 
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+
+export function buildMailtoUrl({ name, email, subject, message }) {
+  const body = [
+    `Name: ${name}`,
+    `Email: ${email}`,
+    '',
+    message,
+  ].join('\n')
+
+  return (
+    `mailto:Neojedrick@gmail.com` +
+    `?subject=${encodeURIComponent(subject)}` +
+    `&body=${encodeURIComponent(body)}`
+  )
+}
+
 export function ContactForm() {
   const [form, setForm] = useState(initialForm)
   const [status, setStatus] = useState('idle')
+  const [errors, setErrors] = useState({})
 
   const update = ({ target }) => {
     setForm((current) => ({
@@ -18,9 +36,15 @@ export function ContactForm() {
       [target.name]: target.value,
     }))
 
-    // Hide the previous status when the user edits the form again.
     if (status !== 'idle') {
       setStatus('idle')
+    }
+
+    if (errors[target.name]) {
+      setErrors((current) => ({
+        ...current,
+        [target.name]: '',
+      }))
     }
   }
 
@@ -31,26 +55,41 @@ export function ContactForm() {
     const email = form.email.trim()
     const subject = form.subject.trim()
     const message = form.message.trim()
+    const nextErrors = {}
 
-    if (!name || !email || !subject || !message) {
+    if (!name) {
+      nextErrors.name = 'Please enter your name.'
+    }
+
+    if (!email) {
+      nextErrors.email = 'Please enter your email address.'
+    } else if (!emailPattern.test(email)) {
+      nextErrors.email = 'Enter a valid email address, such as you@example.com.'
+    }
+
+    if (!subject) {
+      nextErrors.subject = 'Please enter a subject.'
+    }
+
+    if (message.length < 10) {
+      nextErrors.message = 'Message must be at least 10 characters.'
+    }
+
+    if (Object.keys(nextErrors).length > 0) {
+      setErrors(nextErrors)
       setStatus('error')
       return
     }
 
-    const body = [
-      `Name: ${name}`,
-      `Email: ${email}`,
-      '',
-      message,
-    ].join('\n')
-
-    const mailtoUrl =
-      `mailto:Neojedrick@gmail.com` +
-      `?subject=${encodeURIComponent(subject)}` +
-      `&body=${encodeURIComponent(body)}`
+    setErrors({})
 
     // Trigger the user's configured mail application.
-    window.location.href = mailtoUrl
+    window.location.href = buildMailtoUrl({
+      name,
+      email,
+      subject,
+      message,
+    })
 
     // We can confirm that the mail client was requested,
     // but we cannot know whether the user actually sent the email.
@@ -75,6 +114,7 @@ export function ContactForm() {
             onChange={update}
             autoComplete="name"
             maxLength={80}
+            aria-invalid={Boolean(errors.name)}
             required
           />
         </label>
@@ -90,8 +130,18 @@ export function ContactForm() {
             onChange={update}
             autoComplete="email"
             maxLength={254}
+            aria-invalid={Boolean(errors.email)}
+            aria-describedby={errors.email ? 'contact-email-error' : undefined}
             required
           />
+          {errors.email && (
+            <span
+              id="contact-email-error"
+              className="mt-2 block text-xs font-medium text-red-300"
+            >
+              {errors.email}
+            </span>
+          )}
         </label>
       </div>
 
@@ -105,6 +155,7 @@ export function ContactForm() {
           value={form.subject}
           onChange={update}
           maxLength={120}
+          aria-invalid={Boolean(errors.subject)}
           required
         />
       </label>
@@ -119,6 +170,7 @@ export function ContactForm() {
           onChange={update}
           minLength={10}
           maxLength={2000}
+          aria-invalid={Boolean(errors.message)}
           required
         />
       </label>
@@ -169,7 +221,7 @@ export function ContactForm() {
           className="mt-5 rounded-xl border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-300"
           role="alert"
         >
-          Please complete all fields before sending your message.
+          Please check the highlighted fields before sending your message.
         </p>
       )}
     </form>

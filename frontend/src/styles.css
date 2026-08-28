@@ -500,3 +500,61 @@ body { margin: 0; min-width: 320px; background: var(--bg); }
   .hero-glass-content,
   .hero-glass-status-dot { animation: none !important; }
 }
+
+/* QA patch: screenshot case study replaces iframe embedding blocked by the
+   Flexsol security headers. Controls stay rectangular and intentionally quiet. */
+.screenshot-project-showcase { display: grid; overflow: hidden; border: 1px solid rgba(255,255,255,.11); border-radius: 1rem; background: rgba(255,255,255,.02); box-shadow: 0 24px 70px rgba(0,0,0,.22); }
+@media (min-width: 1024px) { .screenshot-project-showcase { grid-template-columns: 1.12fr .88fr; } }
+.project-screenshot-panel { min-width: 0; background: #080808; }
+.project-screenshot-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 52px; padding: 0 1rem; border-bottom: 1px solid rgba(255,255,255,.09); color: rgba(255,255,255,.45); font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.project-screenshot-count { color: rgba(255,255,255,.3); font-variant-numeric: tabular-nums; }
+.project-screenshot-stage { position: relative; aspect-ratio: 16 / 10; min-height: 18rem; background: #050505; }
+.project-screenshot-image-button { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: #050505; cursor: zoom-in; }
+.project-screenshot-image { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.project-screenshot-arrow,.project-screenshot-expand,.project-lightbox-arrow,.project-lightbox-close { display: grid; place-items: center; border: 1px solid rgba(255,255,255,.28); border-radius: 4px; background: rgba(5,5,5,.84); color: #fff; cursor: pointer; transition: background-color .16s ease,border-color .16s ease; }
+.project-screenshot-arrow { position: absolute; top: 50%; width: 42px; height: 42px; transform: translateY(-50%); }
+.project-screenshot-arrow:hover,.project-screenshot-expand:hover,.project-lightbox-arrow:hover,.project-lightbox-close:hover { border-color: rgba(255,255,255,.65); background: rgba(255,255,255,.16); }
+.project-screenshot-arrow-left { left: 1rem; }
+.project-screenshot-arrow-right { right: 1rem; }
+.project-screenshot-caption { position: absolute; left: 1rem; bottom: 1rem; max-width: calc(100% - 6rem); padding: .5rem .65rem; border: 1px solid rgba(255,255,255,.16); border-radius: 4px; background: rgba(5,5,5,.78); color: rgba(255,255,255,.78); font-size: 11px; }
+.project-screenshot-expand { position: absolute; right: 1rem; bottom: 1rem; width: 36px; height: 36px; }
+.project-screenshot-dots { display: flex; flex-wrap: wrap; gap: .4rem; padding: .8rem 1rem 1rem; }
+.project-screenshot-dot { width: 28px; height: 4px; padding: 0; border: 0; border-radius: 1px; background: rgba(255,255,255,.2); cursor: pointer; }
+.project-screenshot-dot:hover,.project-screenshot-dot.is-active { background: #fff; }
+.project-screenshot-dot:focus-visible,.project-screenshot-arrow:focus-visible,.project-screenshot-expand:focus-visible,.project-lightbox-arrow:focus-visible,.project-lightbox-close:focus-visible,.project-screenshot-image-button:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.screenshot-project-details { display: flex; flex-direction: column; justify-content: center; gap: 1.4rem; }
+.project-case-study-facts { display: grid; gap: .75rem; margin: 0; }
+.project-case-study-facts > div { display: grid; gap: .28rem; padding-bottom: .7rem; border-bottom: 1px solid rgba(255,255,255,.08); }
+.project-case-study-facts dt { color: rgba(255,255,255,.34); font-size: 9px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.project-case-study-facts dd { margin: 0; color: rgba(255,255,255,.76); font-size: 13px; line-height: 1.45; }
+.project-preview-note { align-self: center; max-width: 19rem; color: rgba(255,255,255,.34); font-size: 11px; line-height: 1.5; }
+.project-lightbox { position: fixed; inset: 0; z-index: 100; display: grid; grid-template-columns: auto minmax(0,1fr) auto; grid-template-rows: minmax(0,1fr) auto; align-items: center; gap: 1rem; padding: 4rem 1.5rem 1.5rem; background: rgba(0,0,0,.94); }
+.project-lightbox-image { grid-column: 2; grid-row: 1; justify-self: center; max-width: min(100%, 1100px); max-height: calc(100vh - 8rem); object-fit: contain; }
+.project-lightbox-close { position: absolute; top: 1rem; right: 1rem; width: 42px; height: 42px; }
+.project-lightbox-arrow { width: 44px; height: 44px; }
+.project-lightbox-arrow-left { grid-column: 1; grid-row: 1; }
+.project-lightbox-arrow-right { grid-column: 3; grid-row: 1; }
+.project-lightbox-caption { grid-column: 1 / -1; grid-row: 2; justify-self: center; margin: 0; color: rgba(255,255,255,.7); font-size: 12px; text-align: center; }
+@media (max-width: 767px) {
+  .project-screenshot-stage { min-height: 14rem; }
+  .project-screenshot-arrow { width: 36px; height: 36px; }
+  .project-screenshot-arrow-left { left: .65rem; }
+  .project-screenshot-arrow-right { right: .65rem; }
+  .project-screenshot-caption { left: .65rem; bottom: .65rem; max-width: calc(100% - 5rem); font-size: 10px; }
+  .project-screenshot-expand { right: .65rem; bottom: .65rem; width: 32px; height: 32px; }
+  .project-lightbox { grid-template-columns: 1fr 1fr; grid-template-rows: auto minmax(0,1fr) auto; gap: .75rem; padding: 4rem .75rem 1rem; }
+  .project-lightbox-image { grid-column: 1 / -1; grid-row: 2; max-height: calc(100vh - 10rem); }
+  .project-lightbox-arrow-left { grid-column: 1; grid-row: 3; justify-self: start; }
+  .project-lightbox-arrow-right { grid-column: 2; grid-row: 3; justify-self: end; }
+  .project-lightbox-caption { grid-column: 1 / -1; grid-row: 1; max-width: calc(100% - 5rem); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-screenshot-arrow,.project-screenshot-expand,.project-lightbox-arrow,.project-lightbox-close { transition: none; }
+}
+
+/* QA patch: multiple case studies use one reusable layout; this keeps their
+   spacing predictable on desktop and mobile without adding decorative motion. */
+.project-showcase-list {
+  display: grid;
+  gap: 1.5rem;
+}

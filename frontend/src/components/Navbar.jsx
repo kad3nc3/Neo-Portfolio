@@ -12,55 +12,30 @@ const navigation = [
 ]
 
 function ProfileSwitcher() {
-  const [lockedReal, setLockedReal] = useState(false)
-  const [hovering, setHovering] = useState(false)
-  const [suppressPreview, setSuppressPreview] = useState(false)
-
-  const previewing = hovering && !suppressPreview
-  const showReal = lockedReal ? !previewing : previewing
-  const profileState = lockedReal
-    ? (previewing ? 'preview-character' : 'locked-real')
-    : (previewing ? 'preview-real' : 'locked-character')
-
-  const handleMouseEnter = () => {
-    setHovering(true)
-    setSuppressPreview(false)
-  }
-
-  const handleMouseLeave = () => {
-    setHovering(false)
-    setSuppressPreview(false)
-  }
+  const [showReal, setShowReal] = useState(false)
 
   const handleToggle = () => {
-    if (lockedReal) {
-      setLockedReal(false)
-      setSuppressPreview(true)
-    } else {
-      setLockedReal(true)
-      setSuppressPreview(false)
-    }
+    // QA patch: use one explicit click/tap state instead of hover preview.
+    // Hover behavior was inconsistent on touch screens and could make the
+    // portrait change before a visitor intentionally selected it.
+    setShowReal((current) => !current)
   }
 
   return (
     <motion.button
       type="button"
       className={`profile-nav-frame profile-nav-swap ${showReal ? 'profile-nav-show-real' : 'profile-nav-show-character'}`}
-      whileHover={{ scale: 1.06 }}
       whileTap={{ scale: 0.98 }}
-      transition={{ type: 'spring', stiffness: 320, damping: 22 }}
-      title="Hover to preview portrait. Click to toggle portrait."
+      transition={{ duration: 0.16 }}
+      title="Click or tap to toggle portrait."
       aria-label="Toggle profile portrait"
-      data-profile-state={profileState}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onFocus={handleMouseEnter}
-      onBlur={handleMouseLeave}
+      aria-pressed={showReal}
+      data-profile-state={showReal ? 'locked-real' : 'locked-character'}
       onClick={handleToggle}
     >
       <span className="profile-nav-glint" aria-hidden="true" />
       <img src="/profile-character.png" alt="Neo Jedrick Belolo primary profile avatar" className="profile-nav-image profile-nav-image-character" />
-      <img src="/profile.png" alt="Neo Jedrick Belolo photo revealed on hover" className="profile-nav-image profile-nav-image-real" />
+      <img src="/profile.png" alt="Neo Jedrick Belolo profile photo revealed after toggling" className="profile-nav-image profile-nav-image-real" />
     </motion.button>
   )
 }

@@ -10,7 +10,7 @@ import {
   Braces,
   Code2,
   Download,
-  Github,
+  Linkedin,
   GraduationCap,
   Layers3,
   Mail,
@@ -24,6 +24,7 @@ import {
 import { ContactForm } from './components/ContactForm'
 import { Navbar } from './components/Navbar'
 import { Section } from './components/Section'
+import { portfolioProjects, ProjectSlideshow } from './components/ProjectSlideshow'
 
 const skillGroups = [
   {
@@ -412,6 +413,7 @@ function App() {
               <motion.h1
                 className="hero-name-reflective hero-name-ps3 max-w-4xl font-display text-[4rem] font-semibold leading-[.9] sm:text-7xl lg:text-[7.25rem]"
                 data-reflection="Neo Jedrick Belolo"
+                aria-label="Neo Jedrick Belolo"
                 custom={2}
                 variants={heroText}
               >
@@ -464,6 +466,8 @@ function App() {
                   <ArrowDown size={17} />
                 </a>
 
+                {/* QA patch: keep the resume CTA pointed at the verified,
+                    one-page PDF already shipped with this portfolio. */}
                 <a
                   href="/Neo_Jedrick_Belolo_Resume.pdf"
                   target="_blank"
@@ -476,13 +480,13 @@ function App() {
                 </a>
 
                 <a
-                  href="https://github.com/kad3nc3"
+                  href="https://www.linkedin.com/in/neo-jedrick-belolo-5668093b5/"
                   target="_blank"
                   rel="noreferrer"
                   className="icon-button"
-                  aria-label="GitHub profile"
+                  aria-label="LinkedIn profile"
                 >
-                  <Github size={20} />
+                  <Linkedin size={20} />
                 </a>
               </motion.div>
 
@@ -506,7 +510,7 @@ function App() {
           id="projects"
           eyebrow="01 / Selected work"
           title="Featured project"
-          intro="A live full-stack build, embedded directly into the portfolio so visitors can explore the experience before they leave the page."
+          intro="A full-stack build presented through screenshots so visitors can understand the experience before opening the live project."
         >
           <div className="mb-5 flex justify-end">
             <motion.div
@@ -536,7 +540,7 @@ function App() {
               }}
             >
               <span>
-                More projects coming soon
+                Two projects, documented clearly
               </span>
 
               <ArrowUpRight
@@ -545,162 +549,16 @@ function App() {
               />
             </motion.div>
           </div>
-
-          <motion.article
-            className="project-showcase motion-lift"
-            initial={
-              reduceMotion
-                ? false
-                : {
-                    opacity: 0,
-                    y: 26,
-                    scale: 0.985,
-                  }
-            }
-            whileInView={
-              reduceMotion
-                ? undefined
-                : {
-                    opacity: 1,
-                    y: 0,
-                    scale: 1,
-                  }
-            }
-            viewport={{
-              once: false,
-              amount: 0.18,
-            }}
-            whileHover={
-              reduceMotion
-                ? undefined
-                : {
-                    y: -7,
-                  }
-            }
-            transition={{
-              duration: 0.7,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-            <div className="project-preview-shell">
-              <div className="project-preview-toolbar">
-                <div
-                  className="flex items-center gap-2"
-                  aria-hidden="true"
-                >
-                  <span className="terminal-dot terminal-dot-one" />
-                  <span className="terminal-dot terminal-dot-two" />
-                  <span className="terminal-dot terminal-dot-three" />
-                </div>
-
-                <div className="project-url-pill">
-                  flexsol-storage-corp.vercel.app
-                </div>
-
-                <a
-                  href="https://flexsol-storage-corp.vercel.app/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="project-open-link"
-                >
-                  Open live
-                  <ArrowUpRight size={14} />
-                </a>
-              </div>
-
-              <div className="project-preview-frame lighting-card">
-                <div
-                  className="project-preview-sheen"
-                  aria-hidden="true"
-                />
-
-                <iframe
-                  title="Flexsol Storage Corp live website preview"
-                  src="https://flexsol-storage-corp.vercel.app/"
-                  className="project-iframe"
-                  loading="lazy"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                />
-
-                <div className="project-preview-fallback">
-                  <p>
-                    The live preview may take a moment to load.
-                  </p>
-
-                  <a
-                    href="https://flexsol-storage-corp.vercel.app/"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="button-secondary"
-                  >
-                    Open the live website
-                    <ArrowUpRight size={16} />
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div className="project-details">
-              <div>
-                <p className="eyebrow">
-                  Flexsol Storage Corp
-                </p>
-
-                <h3 className="mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">
-                  Real deployed build, shown in context.
-                </h3>
-
-                <p className="mt-5 leading-7 text-white/55">
-                  A freelance web project developed and deployed for
-                  a business, presented here as a live product for
-                  direct exploration.
-                </p>
-              </div>
-
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                {[
-                  ['Live URL', 'flexsol-storage-corp.vercel.app'],
-                  ['Deployment', 'Vercel'],
-                  ['Format', 'Responsive web experience'],
-                  ['Presentation', 'Embedded live preview'],
-                ].map(([label, value]) => (
-                  <div
-                    key={label}
-                    className="project-meta-card"
-                  >
-                    <span>{label}</span>
-                    <strong>{value}</strong>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-8 flex flex-wrap gap-2">
-                {[
-                  'Full-stack web',
-                  'Vercel',
-                  'Live preview',
-                  'Responsive UI',
-                ].map((item) => (
-                  <span
-                    key={item}
-                    className="skill-chip"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-
-              <a
-                href="https://flexsol-storage-corp.vercel.app/"
-                target="_blank"
-                rel="noreferrer"
-                className="mt-8 inline-flex w-fit items-center gap-2 text-sm font-semibold text-white/75 transition hover:text-white"
-              >
-                Explore Flexsol Storage Corp
-                <ArrowUpRight size={16} />
-              </a>
-            </div>
-          </motion.article>
+          {/* QA patch: the live site blocks iframe embedding with X-Frame-Options: DENY.
+              Screenshots keep the portfolio preview fast and visible without weakening
+              the client's security policy. */}
+          {/* QA patch: keep the newest project first while reusing one tested,
+              accessible slideshow implementation for every project case study. */}
+          <div className="project-showcase-list">
+            {portfolioProjects.map((project) => (
+              <ProjectSlideshow key={project.id} project={project} />
+            ))}
+          </div>
         </Section>
 
         <Section
@@ -1074,12 +932,12 @@ function App() {
 
                 <a
                   className="contact-link"
-                  href="https://github.com/kad3nc3"
+                  href="https://www.linkedin.com/in/neo-jedrick-belolo-5668093b5/"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <Github size={19} />
-                  github.com/kad3nc3
+                  <Linkedin size={19} />
+                  linkedin.com/in/neo-jedrick-belolo
                 </a>
 
                 <p className="contact-link">
@@ -1100,6 +958,8 @@ function App() {
             © 2026 Neo Jedrick Belolo. Built with care and curiosity.
           </p>
 
+          {/* QA patch: keep the footer download aligned with the verified
+              PDF asset so it cannot lead to a missing file. */}
           <a
             href="/Neo_Jedrick_Belolo_Resume.pdf"
             download
