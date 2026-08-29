@@ -44,7 +44,7 @@ export const portfolioProjects = [
     role: 'Freelance Web developer',
     languages: 'React.js, Python, HTML, CSS',
     framework: 'React.js frontend with Python backend',
-    tools: 'VS Code, Git, GitHub',
+    tools: 'VS Code, Git, GitHub, Vercel',
     features: 'Materials catalog, service pages, operations information, gallery, location details, and quote requests',
     security: 'HTTPS deployment, safe external links, validated contact actions, and no third-party iframe dependency',
     seo: 'Descriptive metadata, semantic page structure, and clear service content designed for search discovery',

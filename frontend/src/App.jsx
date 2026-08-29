@@ -69,7 +69,7 @@ const skillGroups = [
   {
     icon: Gauge,
     title: 'Performance',
-    skills: ['WebP optimization', 'Lazy-loaded screenshots', 'Mobile-first layout', 'On-demand media loading'],
+    skills: ['WebP optimization', 'Mobile-first layout'],
   },
 ]
 
