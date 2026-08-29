@@ -41,7 +41,7 @@ export const portfolioProjects = [
     eyebrow: 'Featured project',
     summary:
       'A responsive construction-supplies website that makes materials, delivery, hauling, operations, and contact actions easy to find.',
-    role: 'Web developer',
+    role: 'Freelance Web developer',
     languages: 'React.js, Python, HTML, CSS',
     framework: 'React.js frontend with Python backend',
     tools: 'VS Code, Git, GitHub',
