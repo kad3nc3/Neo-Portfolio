@@ -89,8 +89,6 @@ export function ProjectSlideshow({ project }) {
       if (event.key === 'Escape') setLightboxOpen(false)
     }
 
-    // QA patch: keyboard navigation and Escape close make each slideshow usable
-    // without a mouse and prevent a modal from trapping the visitor on screen.
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [project])
@@ -168,6 +166,14 @@ export function ProjectSlideshow({ project }) {
           <h3 className="mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">
             {project.name}
           </h3>
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noreferrer"
+            className="project-live-url"
+          >
+            {project.url}
+          </a>
           <p className="mt-5 leading-7 text-white/55">{project.summary}</p>
         </div>
 

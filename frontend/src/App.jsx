@@ -326,7 +326,6 @@ function App() {
             animation: none !important;
           }
         }
-        /* UI overhaul: remove decorative effects while keeping the actual hero content and useful motion intact. */
         .hero-flow-field,
         .hero-vignette,
         .noise-overlay,
@@ -524,8 +523,6 @@ function App() {
                   <ArrowDown size={17} />
                 </a>
 
-                {/* QA patch: keep the resume CTA pointed at the verified,
-                    one-page PDF already shipped with this portfolio. */}
                 <a
                   href="/Neo_Jedrick_Belolo_Resume.pdf"
                   target="_blank"
@@ -607,11 +604,6 @@ function App() {
               />
             </motion.div>
           </div>
-          {/* QA patch: the live site blocks iframe embedding with X-Frame-Options: DENY.
-              Screenshots keep the portfolio preview fast and visible without weakening
-              the client's security policy. */}
-          {/* QA patch: keep the newest project first while reusing one tested,
-              accessible slideshow implementation for every project case study. */}
           <div className="project-showcase-list">
             {portfolioProjects.map((project) => (
               <ProjectSlideshow key={project.id} project={project} />
@@ -1089,8 +1081,6 @@ function App() {
             © 2026 Neo Jedrick Belolo. Built with care and curiosity.
           </p>
 
-          {/* QA patch: keep the footer download aligned with the verified
-              PDF asset so it cannot lead to a missing file. */}
           <a
             href="/Neo_Jedrick_Belolo_Resume.pdf"
             download

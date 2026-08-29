@@ -83,7 +83,6 @@ export function ContactForm() {
 
     setErrors({})
 
-    // Trigger the user's configured mail application.
     window.location.href = buildMailtoUrl({
       name,
       email,
@@ -91,8 +90,6 @@ export function ContactForm() {
       message,
     })
 
-    // We can confirm that the mail client was requested,
-    // but we cannot know whether the user actually sent the email.
     setStatus('ready')
   }
 

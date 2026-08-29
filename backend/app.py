@@ -8,8 +8,6 @@ from flask_cors import CORS
 from mailer import SMTPMailer, SMTPNotConfigured
 
 
-# QA patch: require a mailbox, an @ sign, and a real alphabetic domain suffix.
-# This rejects values such as "hi" before any mail client or SMTP delivery is used.
 EMAIL_PATTERN = re.compile(
     r"^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,63}$"
 )
@@ -53,8 +51,6 @@ def validate_contact(payload):
 def create_app(config=None, mailer=None):
     load_dotenv()
     app = Flask(__name__)
-    # QA patch: bound request bodies before Flask parses JSON. The contact form
-    # only needs a few short text fields, so accepting large bodies is unnecessary.
     app.config.update(MAX_CONTENT_LENGTH=16 * 1024)
     app.config.update(config or {})
     allowed_origins = [
@@ -76,8 +72,6 @@ def create_app(config=None, mailer=None):
 
     @app.after_request
     def add_security_headers(response):
-        # QA patch: the frontend already has edge security headers; keeping the
-        # API responses protected too avoids exposing a weaker backend surface.
         response.headers.setdefault("X-Content-Type-Options", "nosniff")
         response.headers.setdefault("X-Frame-Options", "DENY")
         response.headers.setdefault(
@@ -101,8 +95,6 @@ def create_app(config=None, mailer=None):
 
     @app.post("/api/contact")
     def contact():
-        # QA patch: reject non-JSON bodies explicitly instead of treating them
-        # as empty form submissions, which gives clients a clear 415 response.
         if not request.is_json:
             return jsonify(ok=False, message="JSON is required."), 415
 
@@ -151,8 +143,6 @@ app = create_app()
 
 
 if __name__ == "__main__":
-    # QA patch: never force Flask debug mode in a deployed process. Local debug
-    # can be opted into explicitly with FLASK_DEBUG=1 when troubleshooting.
     debug = os.getenv("FLASK_DEBUG", "0") == "1"
     app.run(host="127.0.0.1", port=5000, debug=debug)
 

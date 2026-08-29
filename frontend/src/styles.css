@@ -167,7 +167,6 @@ body { margin: 0; min-width: 320px; background: var(--bg); }
 @media (prefers-reduced-motion: reduce) { .hero-name-reflective { animation: none; } }
 
 
-/* Replayable scroll + ambient lighting pass */
 .section-replay { position: relative; }
 .section-replay::before {
   content: '';
@@ -225,7 +224,6 @@ body { margin: 0; min-width: 320px; background: var(--bg); }
 }
 
 
-/* PS3-inspired glass hero refresh: cool silver, cyan, and deep-blue light; no grid, no warm/red accents. */
 .hero-section {
   background:
     radial-gradient(circle at 74% 28%, rgba(115, 190, 255, .095), transparent 27%),
@@ -501,8 +499,6 @@ body { margin: 0; min-width: 320px; background: var(--bg); }
   .hero-glass-status-dot { animation: none !important; }
 }
 
-/* QA patch: screenshot case study replaces iframe embedding blocked by the
-   Flexsol security headers. Controls stay rectangular and intentionally quiet. */
 .screenshot-project-showcase { display: grid; overflow: hidden; border: 1px solid rgba(255,255,255,.11); border-radius: 1rem; background: rgba(255,255,255,.02); box-shadow: 0 24px 70px rgba(0,0,0,.22); }
 @media (min-width: 1024px) { .screenshot-project-showcase { grid-template-columns: 1.12fr .88fr; } }
 .project-screenshot-panel { min-width: 0; background: #080808; }
@@ -552,15 +548,12 @@ body { margin: 0; min-width: 320px; background: var(--bg); }
   .project-screenshot-arrow,.project-screenshot-expand,.project-lightbox-arrow,.project-lightbox-close { transition: none; }
 }
 
-/* QA patch: multiple case studies use one reusable layout; this keeps their
-   spacing predictable on desktop and mobile without adding decorative motion. */
 .project-showcase-list {
   display: grid;
   gap: 1.5rem;
 }
 
 
-/* UI overhaul: keep the portfolio calm, readable, and intentionally hand-built. */
 .nav-glass-shell {
   position: relative;
   overflow: hidden;
@@ -636,7 +629,6 @@ body { margin: 0; min-width: 320px; background: var(--bg); }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
 
-/* iOS-inspired refinement: calm hierarchy, translucent surfaces, and system-like controls. */
 :root {
   --ios-bg: #050506;
   --ios-surface: rgba(28, 28, 30, .72);
@@ -696,7 +688,6 @@ body { background: var(--ios-bg); }
   .nav-glass-shell, .panel-card, .skill-card, .project-card, .button-primary, .button-secondary, .icon-button { transition: none !important; }
 }
 
-/* iOS polish pass: compact navigation island, understated labels, and clearer hierarchy. */
 .nav-glass-shell { max-width: 70rem; min-height: 3.9rem; padding-left: .7rem; padding-right: .7rem; border-radius: 1.65rem; }
 .profile-nav-frame { width: 52px; height: 52px; border-color: rgba(255,255,255,.22); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 8px 24px rgba(0,0,0,.25); animation: none; }
 .nav-link { padding: .65rem .15rem; font-size: 9px; color: rgba(235,235,245,.55); }
@@ -720,7 +711,6 @@ body { background: var(--ios-bg); }
   .nav-link { font-size: 8px; letter-spacing: .1em; }
 }
 
-/* Final navigation size adjustment: larger profile image and readable labels. */
 .nav-glass-shell {
   min-height: 4.35rem;
   padding-left: 1rem;
@@ -756,7 +746,6 @@ body { background: var(--ios-bg); }
   }
 }
 
-/* Definitive navigation sizing: the island must be tall enough to contain the larger portrait. */
 .nav-glass-shell {
   min-height: 5.25rem;
   padding-left: 1.1rem;
@@ -789,4 +778,34 @@ body { background: var(--ios-bg); }
   .nav-link {
     font-size: 11px;
   }
+}
+
+.project-live-url {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: .75rem;
+  color: rgba(235, 235, 245, .62);
+  font-size: .82rem;
+  line-height: 1.35;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, .25);
+  text-underline-offset: .2em;
+  transition: color .18s ease, text-decoration-color .18s ease;
+}
+
+.project-live-url:hover {
+  color: #fff;
+  text-decoration-color: rgba(255, 255, 255, .75);
+}
+
+@media (max-width: 640px) {
+  .project-live-url {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    font-size: .76rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-live-url { transition: none; }
 }

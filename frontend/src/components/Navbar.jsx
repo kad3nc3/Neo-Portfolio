@@ -16,9 +16,6 @@ function ProfileSwitcher() {
   const [showReal, setShowReal] = useState(false)
 
   const handleToggle = () => {
-    // QA patch: use one explicit click/tap state instead of hover preview.
-    // Hover behavior was inconsistent on touch screens and could make the
-    // portrait change before a visitor intentionally selected it.
     setShowReal((current) => !current)
   }
 
