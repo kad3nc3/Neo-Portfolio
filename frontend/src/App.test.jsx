@@ -19,7 +19,7 @@ describe('portfolio', () => {
     expect(screen.getByRole('heading', { name: /Neo Jedrick Belolo/i })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'About me' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Skills' })).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: 'Featured project' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Featured projects' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Education' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Contact' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /View resume/i })).toHaveAttribute(
@@ -43,7 +43,7 @@ describe('portfolio', () => {
     expect(screen.getByRole('heading', { name: /Flexsol Storage Corp\. Website/i })).toBeInTheDocument()
     expect(screen.getByText(/React\.js, Python, HTML, CSS/)).toBeInTheDocument()
     expect(screen.getByText(/VS Code, Git, GitHub, Vercel/)).toBeInTheDocument()
-    expect(screen.getAllByTestId('replay-section')).toHaveLength(5)
+    expect(screen.getAllByTestId('replay-section')).toHaveLength(6)
     expect(screen.getAllByRole('button', { name: /Next .* screenshot/ })).toHaveLength(2)
     expect(screen.getAllByRole('button', { name: /Previous .* screenshot/ })).toHaveLength(2)
   })

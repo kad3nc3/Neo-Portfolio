@@ -558,3 +558,235 @@ body { margin: 0; min-width: 320px; background: var(--bg); }
   display: grid;
   gap: 1.5rem;
 }
+
+
+/* UI overhaul: keep the portfolio calm, readable, and intentionally hand-built. */
+.nav-glass-shell {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .24);
+  border-radius: 1.35rem;
+  background: rgba(44, 44, 46, .56);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, .28), inset 0 1px 0 rgba(255, 255, 255, .18), inset 0 -1px 0 rgba(255, 255, 255, .05);
+  backdrop-filter: blur(26px) saturate(135%);
+  -webkit-backdrop-filter: blur(26px) saturate(135%);
+}
+.nav-glass-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255,255,255,.11), transparent 42%);
+  pointer-events: none;
+}
+.nav-glass-shell > * { position: relative; z-index: 1; }
+.nav-scrolled .nav-glass-shell { background: rgba(44, 44, 46, .68); box-shadow: 0 20px 50px rgba(0, 0, 0, .34), inset 0 1px 0 rgba(255,255,255,.2); }
+.nav-mobile-panel { border-radius: 1rem; margin-top: .5rem; border: 1px solid rgba(255,255,255,.18); background: rgba(38,38,40,.78); box-shadow: 0 16px 40px rgba(0,0,0,.28); }
+.nav-link::after { background: rgba(255,255,255,.8); transition-duration: .18s; }
+.button-primary,
+.button-secondary,
+.icon-button,
+.field-input,
+.skill-card,
+.panel-card,
+.project-card,
+.code-card,
+.current-badge,
+.projects-coming-soon {
+  border-radius: .75rem;
+}
+.button-primary { box-shadow: none; transition: background-color .18s ease, border-color .18s ease, color .18s ease, transform .16s ease; }
+.button-secondary,
+.icon-button { transition: background-color .18s ease, border-color .18s ease, color .18s ease, transform .16s ease; }
+.button-primary:hover,
+.button-secondary:hover,
+.icon-button:hover { transform: translateY(-1px); }
+.button-primary:active,
+.button-secondary:active,
+.icon-button:active { transform: translateY(0) scale(.98); }
+.profile-nav-frame::before,
+.profile-nav-glint,
+.hero-grid,
+.noise-overlay,
+.floating-specks,
+.ambient-orb,
+.terminal-border-glow,
+.terminal-ambient-glow { animation: none !important; }
+.profile-nav-frame::before,
+.profile-nav-glint,
+.hero-grid,
+.noise-overlay,
+.floating-specks,
+.ambient-orb,
+.terminal-border-glow,
+.terminal-ambient-glow { display: none !important; }
+.hero-terminal::after,
+.hero-name-reflective::after { animation: none !important; opacity: 0 !important; }
+.terminal-status,
+.live-dot,
+.terminal-dot,
+.scroll-dot { animation: none !important; }
+
+@media (max-width: 640px) {
+  .nav-glass-shell { border-radius: 1rem; background: rgba(44,44,46,.7); backdrop-filter: blur(22px) saturate(130%); -webkit-backdrop-filter: blur(22px) saturate(130%); }
+  .profile-nav-frame { width: 68px; height: 68px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}
+
+/* iOS-inspired refinement: calm hierarchy, translucent surfaces, and system-like controls. */
+:root {
+  --ios-bg: #050506;
+  --ios-surface: rgba(28, 28, 30, .72);
+  --ios-surface-soft: rgba(255, 255, 255, .055);
+  --ios-line: rgba(255, 255, 255, .14);
+  --ios-muted: rgba(235, 235, 245, .58);
+}
+
+html, body, button, input, textarea { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter, system-ui, sans-serif; }
+body { background: var(--ios-bg); }
+.section-shell { padding-top: 7rem; padding-bottom: 7rem; }
+.section-title { letter-spacing: -.055em; font-weight: 650; }
+.section-intro { color: var(--ios-muted); letter-spacing: -.01em; }
+
+.nav-glass-shell {
+  min-height: 4.25rem;
+  border-radius: 1.5rem;
+  border-color: rgba(255,255,255,.28);
+  background: rgba(50, 50, 52, .64);
+  box-shadow: 0 20px 52px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.22), inset 0 -1px 0 rgba(255,255,255,.08);
+  backdrop-filter: blur(32px) saturate(145%);
+  -webkit-backdrop-filter: blur(32px) saturate(145%);
+}
+.nav-glass-shell::before { background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.025) 48%, transparent 100%); }
+.nav-scrolled .nav-glass-shell { background: rgba(50,50,52,.76); }
+.nav-link { color: rgba(235,235,245,.62); font-size: 10px; letter-spacing: .14em; }
+.nav-link:hover { color: #fff; }
+
+.button-primary, .button-secondary, .icon-button { min-height: 2.9rem; border-radius: .9rem; font-weight: 600; letter-spacing: -.01em; }
+.button-primary { background: #f5f5f7; color: #111113; box-shadow: 0 8px 20px rgba(0,0,0,.18); }
+.button-primary:hover { background: #fff; }
+.button-secondary, .icon-button { border-color: rgba(255,255,255,.2); background: rgba(255,255,255,.075); color: rgba(255,255,255,.9); }
+.button-secondary:hover, .icon-button:hover { border-color: rgba(255,255,255,.32); background: rgba(255,255,255,.13); }
+.icon-button { width: 2.9rem; }
+
+.panel-card, .skill-card, .project-card, .code-card, .current-badge, .projects-coming-soon { border-color: rgba(255,255,255,.14); background: var(--ios-surface); box-shadow: 0 18px 44px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.07); }
+.panel-card, .skill-card, .project-card, .code-card { border-radius: 1.35rem; }
+.skill-card:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2); }
+.skill-icon { border-radius: .85rem; background: rgba(255,255,255,.07); }
+.skill-chip, .mono-chip { border-radius: .65rem; background: rgba(255,255,255,.055); border-color: rgba(255,255,255,.14); }
+.field-input { border-radius: .9rem; background: rgba(10,10,12,.52); border-color: rgba(255,255,255,.14); }
+.field-input:focus { border-color: rgba(255,255,255,.42); background: rgba(10,10,12,.72); }
+
+.project-showcase { border-radius: 1.4rem; background: rgba(255,255,255,.045); border-color: rgba(255,255,255,.14); box-shadow: 0 20px 52px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.06); }
+.project-screenshot-panel { background: rgba(9,9,11,.68); }
+.project-screenshot-toolbar { border-bottom-color: rgba(255,255,255,.1); }
+.project-screenshot-arrow, .project-screenshot-expand, .project-lightbox-arrow, .project-lightbox-close { border-radius: .8rem; background: rgba(44,44,46,.76); border-color: rgba(255,255,255,.2); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+.project-preview-note { color: rgba(235,235,245,.48); }
+
+@media (max-width: 640px) {
+  .section-shell { padding-top: 5.5rem; padding-bottom: 5.5rem; }
+  .nav-glass-shell { min-height: 4rem; border-radius: 1.2rem; }
+  .project-showcase { border-radius: 1.15rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-glass-shell, .panel-card, .skill-card, .project-card, .button-primary, .button-secondary, .icon-button { transition: none !important; }
+}
+
+/* iOS polish pass: compact navigation island, understated labels, and clearer hierarchy. */
+.nav-glass-shell { max-width: 70rem; min-height: 3.9rem; padding-left: .7rem; padding-right: .7rem; border-radius: 1.65rem; }
+.profile-nav-frame { width: 52px; height: 52px; border-color: rgba(255,255,255,.22); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 8px 24px rgba(0,0,0,.25); animation: none; }
+.nav-link { padding: .65rem .15rem; font-size: 9px; color: rgba(235,235,245,.55); }
+.nav-link::after { display: none; }
+.nav-link.text-white { color: rgba(255,255,255,.95); }
+.nav-link .absolute { width: 3px; height: 3px; bottom: -.15rem; background: rgba(255,255,255,.95); }
+
+.eyebrow { border: 0 !important; background: transparent !important; padding: 0 !important; color: rgba(235,235,245,.48) !important; letter-spacing: .18em; }
+.projects-coming-soon { border: 0; background: transparent; box-shadow: none; padding: .35rem 0; color: rgba(235,235,245,.42); backdrop-filter: none; }
+.projects-coming-soon svg { opacity: .65; }
+.current-badge { border-radius: 1rem; background: rgba(38,38,40,.76); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); }
+
+.panel-card, .skill-card, .project-card, .code-card { backdrop-filter: blur(24px) saturate(125%); -webkit-backdrop-filter: blur(24px) saturate(125%); }
+.project-case-study-facts > div { border-bottom-color: rgba(255,255,255,.1); }
+.project-case-study-facts dt { color: rgba(235,235,245,.42); }
+.project-case-study-facts dd { color: rgba(245,245,247,.82); }
+
+@media (max-width: 640px) {
+  .nav-glass-shell { min-height: 3.65rem; padding-left: .45rem; padding-right: .45rem; border-radius: 1.35rem; }
+  .profile-nav-frame { width: 48px; height: 48px; }
+  .nav-link { font-size: 8px; letter-spacing: .1em; }
+}
+
+/* Final navigation size adjustment: larger profile image and readable labels. */
+.nav-glass-shell {
+  min-height: 4.35rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.profile-nav-frame {
+  width: 70px;
+  height: 70px;
+}
+
+.nav-link {
+  padding: .78rem .25rem;
+  font-size: 11.5px;
+  letter-spacing: .12em;
+}
+
+@media (max-width: 640px) {
+  .nav-glass-shell {
+    min-height: 4.05rem;
+    padding-left: .6rem;
+    padding-right: .6rem;
+  }
+
+  .profile-nav-frame {
+    width: 62px;
+    height: 62px;
+  }
+
+  .nav-link {
+    font-size: 10px;
+    letter-spacing: .1em;
+  }
+}
+
+/* Definitive navigation sizing: the island must be tall enough to contain the larger portrait. */
+.nav-glass-shell {
+  min-height: 5.25rem;
+  padding-left: 1.1rem;
+  padding-right: 1.1rem;
+}
+
+.profile-nav-frame {
+  width: 84px;
+  height: 84px;
+}
+
+.nav-link {
+  padding: .9rem .3rem;
+  font-size: 13px;
+  letter-spacing: .11em;
+}
+
+@media (max-width: 640px) {
+  .nav-glass-shell {
+    min-height: 4.5rem;
+    padding-left: .65rem;
+    padding-right: .65rem;
+  }
+
+  .profile-nav-frame {
+    width: 72px;
+    height: 72px;
+  }
+
+  .nav-link {
+    font-size: 11px;
+  }
+}

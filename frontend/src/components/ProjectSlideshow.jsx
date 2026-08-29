@@ -46,6 +46,9 @@ export const portfolioProjects = [
     framework: 'React.js frontend with Python backend',
     tools: 'VS Code, Git, GitHub',
     features: 'Materials catalog, service pages, operations information, gallery, location details, and quote requests',
+    security: 'HTTPS deployment, safe external links, validated contact actions, and no third-party iframe dependency',
+    seo: 'Descriptive metadata, semantic page structure, and clear service content designed for search discovery',
+    previewNote: 'The live site opens in a new tab so the portfolio does not depend on cross-site embedding. These local homepage captures keep the case study fast while preserving the project experience.',
     url: 'https://www.rmmendezabal.com/',
     slides: projectSlides.rmmendezabal,
   },
@@ -60,6 +63,9 @@ export const portfolioProjects = [
     framework: 'Flask with Jinja templates',
     tools: 'VS Code, Git, GitHub, Vercel',
     features: 'Project gallery, contact actions, on-demand video showcase, security headers',
+    security: 'CSP, HSTS, clickjacking protection, MIME sniffing protection, CORS controls, and server-side validation',
+    seo: 'Semantic public pages, descriptive metadata, robots guidance, and crawlable project content',
+    previewNote: 'The live site opens in a new tab because its X-Frame-Options: DENY policy blocks other websites from embedding it in an iframe. These local homepage captures keep the case study fast without weakening the project&apos;s security.',
     url: 'https://flexsolstoragecorp.com/',
     slides: projectSlides.flexsol,
   },
@@ -171,6 +177,8 @@ export function ProjectSlideshow({ project }) {
           <div><dt>Framework</dt><dd>{project.framework}</dd></div>
           <div><dt>Tools and deployment</dt><dd>{project.tools}</dd></div>
           <div><dt>Key features</dt><dd>{project.features}</dd></div>
+          <div><dt>Security</dt><dd>{project.security}</dd></div>
+          <div><dt>SEO and discoverability</dt><dd>{project.seo}</dd></div>
         </dl>
 
         <div className="flex flex-wrap gap-3">
@@ -184,7 +192,7 @@ export function ProjectSlideshow({ project }) {
             <ExternalLink size={16} />
           </a>
           <span className="project-preview-note">
-            Screenshots load here first, so the case study does not depend on iframe embedding.
+            {project.previewNote}
           </span>
         </div>
       </div>

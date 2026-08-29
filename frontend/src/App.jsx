@@ -7,6 +7,7 @@ import {
 import {
   ArrowDown,
   ArrowUpRight,
+  Briefcase,
   Braces,
   Code2,
   Download,
@@ -17,8 +18,11 @@ import {
   MapPin,
   Phone,
   ServerCog,
+  ShieldCheck,
   Smartphone,
   Sparkles,
+  TestTube2,
+  Gauge,
 } from 'lucide-react'
 
 import { ContactForm } from './components/ContactForm'
@@ -50,7 +54,22 @@ const skillGroups = [
   {
     icon: Layers3,
     title: 'Data & tools',
-    skills: ['MySQL basics', 'Git', 'GitHub', 'VS Code', 'Android Studio'],
+    skills: ['MySQL basics', 'Git', 'GitHub', 'VS Code', 'npm', 'Vite'],
+  },
+  {
+    icon: TestTube2,
+    title: 'Testing & QA',
+    skills: ['Vitest', 'Pytest', 'Responsive QA', 'Accessibility checks', 'Keyboard testing'],
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Deployment & security',
+    skills: ['Vercel', 'Flask deployment', 'CSP', 'HSTS', 'Security headers', 'Environment configuration'],
+  },
+  {
+    icon: Gauge,
+    title: 'Performance',
+    skills: ['WebP optimization', 'Lazy-loaded screenshots', 'Mobile-first layout', 'On-demand media loading'],
   },
 ]
 
@@ -307,6 +326,45 @@ function App() {
             animation: none !important;
           }
         }
+        /* UI overhaul: remove decorative effects while keeping the actual hero content and useful motion intact. */
+        .hero-flow-field,
+        .hero-vignette,
+        .noise-overlay,
+        .ambient-orb,
+        .floating-specks,
+        .terminal-border-glow,
+        .terminal-ambient-glow {
+          display: none !important;
+          animation: none !important;
+        }
+
+        .hero-name-reflective,
+        .hero-name-ps3 {
+          background: none !important;
+          color: #f5f5f5 !important;
+          filter: none !important;
+          text-shadow: none !important;
+          animation: none !important;
+        }
+
+        .hero-name-reflective::before,
+        .hero-name-reflective::after,
+        .hero-terminal::after {
+          display: none !important;
+          animation: none !important;
+        }
+
+        .terminal-status,
+        .live-dot,
+        .terminal-dot {
+          animation: none !important;
+          box-shadow: none !important;
+          text-shadow: none !important;
+        }
+
+        .terminal-status { color: rgba(255,255,255,.55) !important; }
+        .live-dot { background: rgba(255,255,255,.7) !important; }
+        .eyebrow { border-radius: .35rem !important; }
       `}</style>
 
       <motion.div
@@ -509,8 +567,8 @@ function App() {
         <Section
           id="projects"
           eyebrow="01 / Selected work"
-          title="Featured project"
-          intro="A full-stack build presented through screenshots so visitors can understand the experience before opening the live project."
+          title="Featured projects"
+          intro="Selected freelance projects built for real businesses, presented through screenshots so visitors can understand the experience before opening each live website."
         >
           <div className="mb-5 flex justify-end">
             <motion.div
@@ -611,7 +669,7 @@ function App() {
 
               <p>
                 I&apos;m now concentrating that foundation on
-                full-stack web development—combining accessible React
+                full-stack web development, combining accessible React
                 interfaces with small, practical Python services.
               </p>
 
@@ -685,8 +743,81 @@ function App() {
         </Section>
 
         <Section
+          id="experience"
+          eyebrow="03 / Experience"
+          title="Freelance web development"
+          intro="Building practical websites for real businesses while developing stronger full-stack habits."
+        >
+          <motion.div
+            className="panel-card glass-card motion-lift lighting-card p-7 sm:p-9"
+            initial={
+              reduceMotion
+                ? false
+                : {
+                    opacity: 0,
+                    y: 22,
+                  }
+            }
+            whileInView={
+              reduceMotion
+                ? undefined
+                : {
+                    opacity: 1,
+                    y: 0,
+                  }
+            }
+            viewport={{
+              once: false,
+              amount: 0.28,
+            }}
+            transition={{
+              duration: 0.6,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+              <div className="flex items-start gap-4">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl border border-white/10 bg-white/[.05] text-white">
+                  <Briefcase size={21} />
+                </span>
+                <div>
+                  <p className="eyebrow">Selected client projects</p>
+                  <h3 className="mt-3 font-display text-2xl font-bold sm:text-3xl">
+                    Freelance Web Developer
+                  </h3>
+                  <p className="mt-2 text-white/50">
+                    Independent project work
+                  </p>
+                </div>
+              </div>
+
+              <span className="w-fit rounded-xl border border-white/10 bg-white/[.04] px-4 py-2 text-sm text-white/50">
+                Client-focused delivery
+              </span>
+            </div>
+
+            <p className="mt-7 max-w-3xl text-base leading-7 text-white/60">
+              Designed and built responsive business websites from structure and interface implementation through deployment-ready polish. The work combines clear content, practical user flows, responsive layouts, and maintainable code.
+            </p>
+
+            <div className="mt-7 grid gap-3 sm:grid-cols-3">
+              {[
+                ['RMMendezabal', 'React and Python website with SEO-focused content structure and responsive project presentation.'],
+                ['Flexsol', 'Flask website with project information, contact actions, on-demand media, and security headers.'],
+                ['Delivery workflow', 'Responsive QA, optimized WebP assets, Git version control, and GitHub-based project delivery.'],
+              ].map(([title, description]) => (
+                <div key={title} className="rounded-2xl border border-white/10 bg-white/[.035] p-4">
+                  <h4 className="text-sm font-semibold text-white">{title}</h4>
+                  <p className="mt-2 text-sm leading-6 text-white/50">{description}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </Section>
+
+        <Section
           id="skills"
-          eyebrow="03 / Toolkit"
+          eyebrow="04 / Toolkit"
           title="Skills"
           intro="A growing toolkit grounded in coursework, hands-on practice, and this portfolio build."
         >
@@ -760,7 +891,7 @@ function App() {
 
         <Section
           id="education"
-          eyebrow="04 / Education"
+          eyebrow="05 / Education"
           title="Education"
           intro="Building a broad computing foundation, then applying it to the web."
         >
@@ -834,7 +965,7 @@ function App() {
                 </div>
 
                 <span className="w-fit rounded-full border border-white/10 px-4 py-2 text-sm text-white/40">
-                  2023 — Present
+                  2023 to Present
                 </span>
               </div>
 
@@ -883,7 +1014,7 @@ function App() {
 
         <Section
           id="contact"
-          eyebrow="05 / Contact"
+          eyebrow="06 / Contact"
           title="Contact"
           intro="Have an internship, project, or learning opportunity in mind? I’d be glad to hear about it."
         >

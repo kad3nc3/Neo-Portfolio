@@ -6,6 +6,7 @@ const navigation = [
   ['Home', 'home'],
   ['Project', 'projects'],
   ['About', 'about'],
+  ['Experience', 'experience'],
   ['Skills', 'skills'],
   ['Education', 'education'],
   ['Contact', 'contact'],
@@ -63,8 +64,8 @@ export function Navbar() {
   }, [])
 
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 transition duration-500 ${scrolled ? 'nav-scrolled' : ''}`}>
-      <nav className="mx-auto flex h-24 max-w-7xl items-center justify-between px-5 sm:px-8" aria-label="Primary navigation">
+    <header className={`fixed inset-x-0 top-3 z-50 px-3 transition duration-300 sm:top-4 sm:px-6 ${scrolled ? 'nav-scrolled' : ''}`}>
+      <nav className="nav-glass-shell mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-7" aria-label="Primary navigation">
         <ProfileSwitcher />
 
         <div className="hidden items-center gap-7 lg:flex">
@@ -82,7 +83,7 @@ export function Navbar() {
 
         <button
           type="button"
-          className="grid h-11 w-11 place-items-center rounded-full border border-white/15 text-white sm:hidden"
+          className="grid h-10 w-10 place-items-center rounded-lg border border-white/15 text-white sm:hidden"
           aria-expanded={open}
           aria-controls="mobile-navigation"
           aria-label={open ? 'Close navigation' : 'Open navigation'}
@@ -96,7 +97,7 @@ export function Navbar() {
         {open && (
           <motion.div
             id="mobile-navigation"
-            className="border-t border-white/10 bg-black/90 px-5 py-5 backdrop-blur-xl sm:hidden"
+            className="nav-mobile-panel border-t border-white/10 bg-black/90 px-5 py-5 backdrop-blur-xl sm:hidden"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
