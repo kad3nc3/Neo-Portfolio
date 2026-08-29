@@ -8,7 +8,11 @@ from flask_cors import CORS
 from mailer import SMTPMailer, SMTPNotConfigured
 
 
-EMAIL_PATTERN = re.compile(r"^[^\s@]+@[^\s@]+\.[^\s@]+$")
+# QA patch: require a mailbox, an @ sign, and a real alphabetic domain suffix.
+# This rejects values such as "hi" before any mail client or SMTP delivery is used.
+EMAIL_PATTERN = re.compile(
+    r"^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,63}$"
+)
 
 
 def clean(value):
@@ -49,11 +53,46 @@ def validate_contact(payload):
 def create_app(config=None, mailer=None):
     load_dotenv()
     app = Flask(__name__)
+    # QA patch: bound request bodies before Flask parses JSON. The contact form
+    # only needs a few short text fields, so accepting large bodies is unnecessary.
+    app.config.update(MAX_CONTENT_LENGTH=16 * 1024)
     app.config.update(config or {})
-    allowed_origins = os.getenv(
-        "CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173"
-    ).split(",")
+    allowed_origins = [
+        origin.strip()
+        for origin in os.getenv(
+            "CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173"
+        ).split(",")
+        if origin.strip()
+    ]
     CORS(app, resources={r"/api/*": {"origins": allowed_origins}})
+
+    @app.errorhandler(413)
+    def request_too_large(_error):
+        return jsonify(ok=False, message="Request is too large."), 413
+
+    @app.errorhandler(405)
+    def method_not_allowed(_error):
+        return jsonify(ok=False, message="Method not allowed."), 405
+
+    @app.after_request
+    def add_security_headers(response):
+        # QA patch: the frontend already has edge security headers; keeping the
+        # API responses protected too avoids exposing a weaker backend surface.
+        response.headers.setdefault("X-Content-Type-Options", "nosniff")
+        response.headers.setdefault("X-Frame-Options", "DENY")
+        response.headers.setdefault(
+            "Referrer-Policy", "strict-origin-when-cross-origin"
+        )
+        response.headers.setdefault(
+            "Permissions-Policy", "camera=(), microphone=(), geolocation=()"
+        )
+        response.headers.setdefault(
+            "Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'; base-uri 'none'"
+        )
+        if request.path.startswith("/api/"):
+            response.headers.setdefault("Cache-Control", "no-store")
+        return response
+
     delivery = mailer or SMTPMailer()
 
     @app.get("/api/health")
@@ -62,7 +101,15 @@ def create_app(config=None, mailer=None):
 
     @app.post("/api/contact")
     def contact():
-        payload = request.get_json(silent=True) or {}
+        # QA patch: reject non-JSON bodies explicitly instead of treating them
+        # as empty form submissions, which gives clients a clear 415 response.
+        if not request.is_json:
+            return jsonify(ok=False, message="JSON is required."), 415
+
+        payload = request.get_json(silent=True)
+        if not isinstance(payload, dict):
+            return jsonify(ok=False, message="A JSON object is required."), 400
+
         values, errors = validate_contact(payload)
         if errors:
             return jsonify(ok=False, errors=errors), 400
@@ -104,5 +151,8 @@ app = create_app()
 
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000, debug=True)
+    # QA patch: never force Flask debug mode in a deployed process. Local debug
+    # can be opted into explicitly with FLASK_DEBUG=1 when troubleshooting.
+    debug = os.getenv("FLASK_DEBUG", "0") == "1"
+    app.run(host="127.0.0.1", port=5000, debug=debug)
 

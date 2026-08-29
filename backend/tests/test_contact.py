@@ -32,6 +32,29 @@ def test_health_check(client):
     response = client.get("/api/health")
     assert response.status_code == 200
     assert response.get_json() == {"ok": True}
+    assert response.headers["X-Content-Type-Options"] == "nosniff"
+    assert response.headers["X-Frame-Options"] == "DENY"
+    assert response.headers["Cache-Control"] == "no-store"
+
+
+def test_contact_rejects_get_method(client):
+    response = client.get("/api/contact")
+    assert response.status_code == 405
+    assert response.get_json() == {"ok": False, "message": "Method not allowed."}
+
+
+def test_contact_requires_json(client, mailer):
+    response = client.post("/api/contact", data="test", content_type="text/plain")
+    assert response.status_code == 415
+    assert response.get_json() == {"ok": False, "message": "JSON is required."}
+    mailer.send.assert_not_called()
+
+
+def test_contact_rejects_oversized_request(client, mailer):
+    response = client.post("/api/contact", json={"message": "x" * 20_000})
+    assert response.status_code == 413
+    assert response.get_json() == {"ok": False, "message": "Request is too large."}
+    mailer.send.assert_not_called()
 
 
 def test_valid_contact_message_is_delivered(client, mailer):
@@ -53,7 +76,7 @@ def test_valid_contact_message_is_delivered(client, mailer):
     ("field", "value", "expected_error"),
     [
         ("name", "", "Please enter your name."),
-        ("email", "invalid", "Please enter a valid email address."),
+        ("email", "hi", "Please enter a valid email address."),
         ("subject", "", "Please enter a subject."),
         ("message", "short", "Message must be at least 10 characters."),
     ],
