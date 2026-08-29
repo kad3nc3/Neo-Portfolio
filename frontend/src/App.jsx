@@ -1086,7 +1086,7 @@ function App() {
             className="inline-flex items-center gap-2 transition hover:text-white"
           >
             <Download size={16} />
-            Download résumé
+            Download my résumé!
           </a>
         </div>
       </footer>
