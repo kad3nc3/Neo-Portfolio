@@ -185,7 +185,7 @@ export function ContactForm() {
           className="inline-flex items-center gap-1.5 text-sm text-mist transition-colors hover:text-white"
           href="mailto:Neojedrick@gmail.com"
         >
-          Or email me directly
+          Or email me directly!
           <ArrowUpRight size={15} />
         </a>
       </div>
@@ -207,7 +207,7 @@ export function ContactForm() {
 
             <p className="mt-1 text-teal/80">
               Your email application should open with the message
-              prepared. Press Send to deliver it.
+              prepared. Press Send to deliver it!
             </p>
           </div>
         </div>
