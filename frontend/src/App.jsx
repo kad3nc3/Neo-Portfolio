@@ -54,7 +54,7 @@ const skillGroups = [
   {
     icon: Layers3,
     title: 'Data & tools',
-    skills: ['MySQL basics', 'Git', 'GitHub', 'VS Code', 'npm', 'Vite'],
+    skills: ['MySQL basics', 'Git', 'GitHub', 'VS Code', 'npm', 'Vite , AI Coding Assistants'],
   },
   {
     icon: TestTube2,
@@ -666,9 +666,8 @@ function App() {
               </p>
 
               <p>
-                I&apos;m looking for an internship where I can
-                contribute carefully, learn from experienced
-                engineers, and turn feedback into better software.
+                Aspiring Web Developer dedicated to writing clean, maintainable code, 
+                building responsive web apps, and growing through team collaboration.
               </p>
             </motion.div>
 
