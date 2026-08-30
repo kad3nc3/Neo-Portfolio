@@ -44,7 +44,7 @@ const skillGroups = [
   {
     icon: Braces,
     title: 'Programming',
-    skills: ['Java', 'C++', 'Object-oriented fundamentals'],
+    skills: ['Java', 'C++', 'PHP', 'Object-oriented fundamentals'],
   },
   {
     icon: Smartphone,
