@@ -54,7 +54,7 @@ const skillGroups = [
   {
     icon: Layers3,
     title: 'Data & tools',
-    skills: ['MySQL basics', 'Git', 'GitHub', 'VS Code', 'npm', 'Vite , AI Coding Assistants'],
+    skills: ['MySQL basics', 'Git', 'GitHub', 'VS Code', 'npm', 'AI Coding Assistants'],
   },
   {
     icon: TestTube2,
