@@ -497,8 +497,8 @@ function App() {
                 custom={4}
                 variants={heroText}
               >
-                Aspiring full-stack developer building thoughtful
-                interfaces and practical Python-backed web experiences.
+                Aspiring full-stack developer crafting React.js 
+                interfaces and practical Python-powered web applications.  
               </motion.p>
 
               <motion.p
