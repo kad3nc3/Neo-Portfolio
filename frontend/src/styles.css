@@ -690,6 +690,64 @@ body { background: var(--ios-bg); }
 }
 
 
+/* Lightweight motion layer: GPU-friendly transforms, opacity, and one-pixel accents. */
+.site-shell { position: relative; isolation: isolate; }
+.site-shell::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(115deg, rgba(255,255,255,.018), transparent 28%, rgba(255,255,255,.012) 68%, transparent);
+  animation: pageSheen 14s ease-in-out infinite alternate;
+}
+
+.scroll-orbit { position: fixed; right: 1.3rem; bottom: 1.5rem; z-index: 30; width: 2.2rem; height: 2.2rem; pointer-events: none; opacity: .7; }
+.scroll-orbit-ring { position: absolute; inset: .15rem; border: 1px solid rgba(255,255,255,.2); border-radius: 50%; animation: orbitSpin 8s linear infinite; }
+.scroll-orbit-ring::after { content: ''; position: absolute; top: -.18rem; left: 50%; width: .35rem; height: .35rem; border-radius: 50%; background: #fff; box-shadow: 0 0 14px rgba(255,255,255,.8); }
+.scroll-orbit-dot { position: absolute; inset: .8rem; border-radius: 50%; background: rgba(255,255,255,.8); box-shadow: 0 0 18px rgba(255,255,255,.25); }
+
+.hero-scanline { position: absolute; inset: 0; pointer-events: none; opacity: .13; background: repeating-linear-gradient(180deg, transparent 0 5px, rgba(255,255,255,.035) 6px, transparent 7px); mask-image: linear-gradient(90deg, transparent, black 18%, black 82%, transparent); animation: scanlineDrift 10s linear infinite; }
+.hero-orbit { position: absolute; border: 1px solid rgba(255,255,255,.1); border-radius: 50%; pointer-events: none; transform: rotate(-20deg); }
+.hero-orbit-one { right: -9rem; top: 12%; width: 38rem; height: 19rem; animation: orbitFloat 12s ease-in-out infinite; }
+.hero-orbit-two { right: 8%; bottom: 8%; width: 12rem; height: 6rem; opacity: .55; animation: orbitFloat 9s ease-in-out infinite reverse; }
+
+.section-reveal { position: relative; }
+.section-reveal::after { content: ''; position: absolute; top: 7rem; bottom: 7rem; left: 0; width: 1px; background: linear-gradient(180deg, transparent, rgba(255,255,255,.18), transparent); transform-origin: top; animation: sectionRule 1.2s cubic-bezier(.22,1,.36,1) both; }
+.motion-project-card { transform: translateZ(0); transition: transform .5s cubic-bezier(.22,1,.36,1), border-color .35s ease, box-shadow .5s ease; will-change: transform; }
+.motion-project-card:hover { transform: translateY(-8px) rotateX(1deg); border-color: rgba(255,255,255,.25); box-shadow: 0 28px 70px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.1); }
+.motion-project-card .project-screenshot-image { transition: transform .8s cubic-bezier(.22,1,.36,1), filter .5s ease; }
+.motion-project-card:hover .project-screenshot-image { transform: scale(1.025); filter: saturate(1.05) contrast(1.04); }
+.motion-project-card .project-case-study-facts > div { transition: transform .3s ease, border-color .3s ease; }
+.motion-project-card .project-case-study-facts > div:hover { transform: translateX(5px); border-color: rgba(255,255,255,.3); }
+
+@keyframes pageSheen { from { transform: translateX(-4%); opacity: .45; } to { transform: translateX(4%); opacity: 1; } }
+@keyframes orbitSpin { to { transform: rotate(360deg); } }
+@keyframes scanlineDrift { from { background-position: 0 0; } to { background-position: 0 80px; } }
+@keyframes orbitFloat { 0%,100% { transform: rotate(-20deg) translate3d(0,0,0); } 50% { transform: rotate(-14deg) translate3d(-1.5rem,1rem,0); } }
+@keyframes sectionRule { from { transform: scaleY(0); opacity: 0; } to { transform: scaleY(1); opacity: 1; } }
+
+@supports (animation-timeline: view()) {
+  .section-reveal::after { animation-name: sectionRuleScroll; animation-timeline: view(); animation-range: entry 0% cover 35%; }
+  .motion-project-card { animation: cardLiftScroll linear both; animation-timeline: view(); animation-range: entry 0% cover 42%; }
+  @keyframes sectionRuleScroll { from { transform: scaleY(0); opacity: 0; } to { transform: scaleY(1); opacity: 1; } }
+  @keyframes cardLiftScroll { from { opacity: .45; transform: translateY(2rem) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+}
+
+@media (max-width: 640px) {
+  .scroll-orbit { right: .7rem; bottom: .8rem; transform: scale(.82); }
+  .hero-orbit-one { right: -15rem; top: 24%; }
+  .section-reveal::after { top: 5.5rem; bottom: 5.5rem; opacity: .55; }
+  .motion-project-card:hover { transform: translateY(-3px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-shell::before, .scroll-orbit-ring, .hero-scanline, .hero-orbit, .section-reveal::after { animation: none !important; }
+  .motion-project-card, .motion-project-card:hover, .motion-project-card .project-case-study-facts > div:hover { transform: none !important; }
+  .motion-project-card .project-screenshot-image, .motion-project-card:hover .project-screenshot-image { transform: none; }
+}
+
+
 .nav-glass-shell { max-width: 70rem; min-height: 3.9rem; padding-left: .7rem; padding-right: .7rem; border-radius: 1.65rem; }
 .profile-nav-frame { width: 52px; height: 52px; border-color: rgba(255,255,255,.22); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 8px 24px rgba(0,0,0,.25); animation: none; }
 .nav-link { padding: .65rem .15rem; font-size: 9px; color: rgba(235,235,245,.55); }

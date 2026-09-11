@@ -94,7 +94,7 @@ export function ProjectSlideshow({ project }) {
   }, [project])
 
   return (
-    <article className="project-showcase screenshot-project-showcase">
+    <article className="project-showcase screenshot-project-showcase motion-project-card">
       <div className="project-screenshot-panel">
         <div className="project-screenshot-toolbar">
           <span className="project-screenshot-label">Project preview</span>

@@ -59,7 +59,7 @@ const skillGroups = [
   {
     icon: TestTube2,
     title: 'Testing & QA',
-    skills: ['Vitest', 'Pytest', 'Responsive QA', 'Accessibility checks', 'Keyboard testing'],
+    skills: ['Vitest', 'Pytest', 'Responsive QA', 'Accessibility checks'],
   },
   {
     icon: ShieldCheck,
@@ -113,7 +113,7 @@ function App() {
   )
 
   return (
-    <div className="min-h-screen overflow-clip bg-ink text-white">
+    <div className="site-shell min-h-screen overflow-clip bg-ink text-white">
       <style>{`
         html,
         body {
@@ -371,6 +371,11 @@ function App() {
         style={{ scaleX: scrollYProgress }}
       />
 
+      <div className="scroll-orbit" aria-hidden="true">
+        <span className="scroll-orbit-dot" />
+        <span className="scroll-orbit-ring" />
+      </div>
+
       <Navbar />
 
       <main>
@@ -388,6 +393,10 @@ function App() {
             <span className="hero-flow-glow hero-flow-glow-a" />
             <span className="hero-flow-glow hero-flow-glow-b" />
           </div>
+
+          <div className="hero-scanline" aria-hidden="true" />
+          <div className="hero-orbit hero-orbit-one" aria-hidden="true" />
+          <div className="hero-orbit hero-orbit-two" aria-hidden="true" />
 
           <div
             className="noise-overlay absolute inset-0"

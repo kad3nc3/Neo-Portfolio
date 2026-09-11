@@ -6,7 +6,7 @@ export function Section({ id, eyebrow, title, intro, children, className = '' })
   return (
     <motion.section
       id={id}
-      data-testid="replay-section" data-replay-on-scroll="true" className={`section-shell scroll-mt-24 section-replay ${className}`}
+      data-testid="replay-section" data-replay-on-scroll="true" className={`section-shell scroll-mt-24 section-replay section-reveal ${className}`}
       initial={reduceMotion ? false : { opacity: 0, y: 36 }}
       whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: false, amount: 0.14 }}
