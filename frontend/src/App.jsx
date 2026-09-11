@@ -4,6 +4,7 @@ import {
   useScroll,
   useTransform,
 } from 'framer-motion'
+import { useEffect, useRef } from 'react'
 import {
   ArrowDown,
   ArrowUpRight,
@@ -92,7 +93,63 @@ const heroText = {
 
 function App() {
   const reduceMotion = useReducedMotion()
+  const siteRef = useRef(null)
   const { scrollYProgress, scrollY } = useScroll()
+
+  useEffect(() => {
+    const site = siteRef.current
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)')
+
+    if (!site || reduceMotion || !finePointer.matches) return undefined
+
+    let frameId = 0
+
+    const updatePointerEffects = (event) => {
+      cancelAnimationFrame(frameId)
+
+      frameId = requestAnimationFrame(() => {
+        site.style.setProperty('--cursor-x', `${event.clientX}px`)
+        site.style.setProperty('--cursor-y', `${event.clientY}px`)
+
+        const interactiveSurface = event.target.closest(
+          '.lighting-card, .motion-project-card, .nav-glass-shell',
+        )
+
+        if (!interactiveSurface) return
+
+        const bounds = interactiveSurface.getBoundingClientRect()
+        const x = event.clientX - bounds.left
+        const y = event.clientY - bounds.top
+
+        interactiveSurface.style.setProperty('--pointer-x', `${x}px`)
+        interactiveSurface.style.setProperty('--pointer-y', `${y}px`)
+
+        if (interactiveSurface.classList.contains('motion-project-card')) {
+          const rotateY = ((x / bounds.width) - 0.5) * 2.4
+          const rotateX = (0.5 - (y / bounds.height)) * 2.4
+          interactiveSurface.style.setProperty('--card-rotate-x', `${rotateX}deg`)
+          interactiveSurface.style.setProperty('--card-rotate-y', `${rotateY}deg`)
+        }
+      })
+    }
+
+    const resetProjectCard = (event) => {
+      const projectCard = event.target.closest('.motion-project-card')
+      if (!projectCard || projectCard.contains(event.relatedTarget)) return
+
+      projectCard.style.setProperty('--card-rotate-x', '0deg')
+      projectCard.style.setProperty('--card-rotate-y', '0deg')
+    }
+
+    site.addEventListener('pointermove', updatePointerEffects, { passive: true })
+    site.addEventListener('pointerout', resetProjectCard, { passive: true })
+
+    return () => {
+      cancelAnimationFrame(frameId)
+      site.removeEventListener('pointermove', updatePointerEffects)
+      site.removeEventListener('pointerout', resetProjectCard)
+    }
+  }, [reduceMotion])
 
   const heroY = useTransform(
     scrollY,
@@ -113,7 +170,7 @@ function App() {
   )
 
   return (
-    <div className="site-shell min-h-screen overflow-clip bg-ink text-white">
+    <div ref={siteRef} className="site-shell min-h-screen overflow-clip bg-ink text-white">
       <style>{`
         html,
         body {
@@ -367,14 +424,11 @@ function App() {
       `}</style>
 
       <motion.div
-        className="fixed left-0 right-0 top-0 z-[70] h-px origin-left bg-white"
+        className="scroll-progress fixed left-0 right-0 top-0 z-[70] h-px origin-left bg-white"
         style={{ scaleX: scrollYProgress }}
       />
 
-      <div className="scroll-orbit" aria-hidden="true">
-        <span className="scroll-orbit-dot" />
-        <span className="scroll-orbit-ring" />
-      </div>
+      <div className="cursor-aura" aria-hidden="true" />
 
       <Navbar />
 
@@ -597,7 +651,7 @@ function App() {
                     }
               }
               viewport={{
-                once: false,
+                once: true,
                 amount: 0.6,
               }}
               transition={{
@@ -647,7 +701,7 @@ function App() {
                     }
               }
               viewport={{
-                once: false,
+                once: true,
                 amount: 0.25,
               }}
               whileHover={
@@ -707,7 +761,7 @@ function App() {
                         }
                   }
                   viewport={{
-                    once: false,
+                    once: true,
                     amount: 0.5,
                   }}
                   whileHover={
@@ -768,7 +822,7 @@ function App() {
                   }
             }
             viewport={{
-              once: false,
+              once: true,
               amount: 0.28,
             }}
             transition={{
@@ -850,7 +904,7 @@ function App() {
                         }
                   }
                   viewport={{
-                    once: false,
+                    once: true,
                     amount: 0.25,
                   }}
                   whileHover={
@@ -938,7 +992,7 @@ function App() {
                     }
               }
               viewport={{
-                once: false,
+                once: true,
                 amount: 0.28,
               }}
               whileHover={
@@ -1001,7 +1055,7 @@ function App() {
                           }
                     }
                     viewport={{
-                      once: false,
+                      once: true,
                       amount: 0.6,
                     }}
                     transition={{
