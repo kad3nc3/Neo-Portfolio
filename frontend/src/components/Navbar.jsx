@@ -13,28 +13,14 @@ const navigation = [
 ]
 
 function ProfileSwitcher() {
-  const [showReal, setShowReal] = useState(false)
-
-  const handleToggle = () => {
-    setShowReal((current) => !current)
-  }
-
   return (
-    <motion.button
-      type="button"
-      className={`profile-nav-frame profile-nav-swap ${showReal ? 'profile-nav-show-real' : 'profile-nav-show-character'}`}
-      whileTap={{ scale: 0.98 }}
+    <motion.div
+      className="profile-nav-frame"
+      whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.16 }}
-      title="Click or tap to toggle portrait."
-      aria-label="Toggle profile portrait"
-      aria-pressed={showReal}
-      data-profile-state={showReal ? 'locked-real' : 'locked-character'}
-      onClick={handleToggle}
     >
-      <span className="profile-nav-glint" aria-hidden="true" />
-      <img src="/profile-character.png" alt="Neo Jedrick Belolo primary profile avatar" className="profile-nav-image profile-nav-image-character" />
-      <img src="/profile.png" alt="Neo Jedrick Belolo profile photo revealed after toggling" className="profile-nav-image profile-nav-image-real" />
-    </motion.button>
+      <img src="/profile.png" alt="Neo Jedrick Belolo" className="profile-nav-image" />
+    </motion.div>
   )
 }
 

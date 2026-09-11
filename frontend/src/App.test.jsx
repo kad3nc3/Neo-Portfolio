@@ -42,7 +42,7 @@ describe('portfolio', () => {
     expect(screen.getByRole('heading', { name: /R\.M Mendezabal Construction Supplies Trading/i })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: /Flexsol Storage Corp\. Website/i })).toBeInTheDocument()
     expect(screen.getByText(/React\.js, Python, HTML, CSS/)).toBeInTheDocument()
-    expect(screen.getByText(/VS Code, Git, GitHub, Vercel/)).toBeInTheDocument()
+    expect(screen.getAllByText(/VS Code, Git, GitHub, Vercel/).length).toBeGreaterThan(0)
     expect(screen.getAllByTestId('replay-section')).toHaveLength(6)
     expect(screen.getAllByRole('button', { name: /Next .* screenshot/ })).toHaveLength(2)
     expect(screen.getAllByRole('button', { name: /Previous .* screenshot/ })).toHaveLength(2)
@@ -77,23 +77,10 @@ describe('portfolio', () => {
     expect(screen.getByDisplayValue('hi')).toHaveAttribute('aria-invalid', 'true')
   })
 
-  test('toggles the profile portrait only after an intentional click or tap', async () => {
-    const user = userEvent.setup()
+  test('shows the real profile portrait in the navigation', () => {
     render(<App />)
 
-    const profile = screen.getByRole('button', { name: /toggle profile portrait/i })
-    expect(profile).toHaveAttribute('data-profile-state', 'locked-character')
-    expect(profile).toHaveAttribute('aria-pressed', 'false')
-
-    await user.hover(profile)
-    expect(profile).toHaveAttribute('data-profile-state', 'locked-character')
-
-    await user.click(profile)
-    expect(profile).toHaveAttribute('data-profile-state', 'locked-real')
-    expect(profile).toHaveAttribute('aria-pressed', 'true')
-
-    await user.unhover(profile)
-    expect(profile).toHaveAttribute('data-profile-state', 'locked-real')
+    expect(screen.getByRole('img', { name: 'Neo Jedrick Belolo' })).toHaveAttribute('src', '/profile.png')
   })
 
   test('links the social profile icon to LinkedIn', () => {

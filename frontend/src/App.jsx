@@ -497,8 +497,9 @@ function App() {
                 custom={4}
                 variants={heroText}
               >
-                Aspiring full-stack developer crafting React.js 
-                interfaces and practical Python-powered web applications.  
+                I build responsive websites and small web apps with React,
+                Python, and Flask. I&apos;m still getting comfortable with React,
+                but I enjoy learning by working on real projects.
               </motion.p>
 
               <motion.p
@@ -506,8 +507,8 @@ function App() {
                 custom={5}
                 variants={heroText}
               >
-                Third-year BS Information Technology student at FEU
-                Alabang, specializing in Web and Mobile Applications.
+                4th year BS Information Technology student at FEU Alabang,
+                specializing in Web and Mobile Applications.
               </motion.p>
 
               <motion.div
@@ -615,7 +616,7 @@ function App() {
           id="about"
           eyebrow="02 / About"
           title="About me"
-          intro="I care about clear interfaces, dependable code, and learning by building real things."
+          intro="I enjoy making useful things for the web and learning by building them."
         >
           <div className="grid gap-8 lg:grid-cols-[1.1fr_.9fr]">
             <motion.div
@@ -653,21 +654,21 @@ function App() {
               }}
             >
               <p>
-                I&apos;m a third-year BSIT student specializing in
-                Web and Mobile Applications. My academic work has
-                given me a foundation in frontend development,
-                programming, mobile interfaces, and relational data.
+                I&apos;m a 4th year BSIT student specializing in Web and
+                Mobile Applications. School has given me a solid base in
+                frontend development, programming, mobile interfaces, and databases.
               </p>
 
               <p>
-                I&apos;m now concentrating that foundation on
-                full-stack web development, combining accessible React
-                interfaces with small, practical Python services.
+                These days, I&apos;m putting that foundation into practice through
+                full-stack web projects, pairing React interfaces with small
+                Python services.
               </p>
 
               <p>
-                Aspiring Web Developer dedicated to writing clean, maintainable code, 
-                building responsive web apps, and growing through team collaboration.
+                I&apos;m still growing as a developer, but I care about writing code
+                that is easy to understand, building responsive web apps, and
+                working well with other people.
               </p>
             </motion.div>
 
@@ -737,7 +738,7 @@ function App() {
           id="experience"
           eyebrow="03 / Experience"
           title="Freelance web development"
-          intro="Building practical websites for real businesses while developing stronger full-stack habits."
+          intro="A few client projects where I handled the website build from idea to deployment."
         >
           <motion.div
             className="panel-card glass-card motion-lift lighting-card p-7 sm:p-9"
@@ -788,14 +789,17 @@ function App() {
             </div>
 
             <p className="mt-7 max-w-3xl text-base leading-7 text-white/60">
-              Designed and built responsive business websites from structure and interface implementation through deployment-ready polish. The work combines clear content, practical user flows, responsive layouts, and maintainable code.
+              I design and build responsive websites for small businesses, from
+              organizing the content and layout to getting the finished site ready
+              to deploy. I try to keep the experience straightforward for visitors
+              and the code manageable for whoever works on it next.
             </p>
 
             <div className="mt-7 grid gap-3 sm:grid-cols-3">
               {[
-                ['RMMendezabal', 'React and Python website with SEO-focused content structure and responsive project presentation.'],
-                ['Flexsol', 'Flask website with project information, contact actions, on-demand media, and security headers.'],
-                ['Delivery workflow', 'Responsive QA, optimized WebP assets, Git version control, and GitHub-based project delivery.'],
+                ['RMMendezabal', 'A React and Python site with a clear product catalog and responsive project pages.'],
+                ['Flexsol', 'A Flask site that brings together project details, contact actions, and media.'],
+                ['How I work', 'I test across screen sizes, optimize assets, and keep the project organized with Git and GitHub.'],
               ].map(([title, description]) => (
                 <div key={title} className="rounded-2xl border border-white/10 bg-white/[.035] p-4">
                   <h4 className="text-sm font-semibold text-white">{title}</h4>
