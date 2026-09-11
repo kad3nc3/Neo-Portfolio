@@ -201,7 +201,7 @@ export function ContactForm() {
 
           <div>
             <p className="font-medium">
-              Your message awaits!
+              Message ready
             </p>
 
             <p className="mt-1 text-teal/80">

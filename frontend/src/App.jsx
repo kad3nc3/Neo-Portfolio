@@ -10,6 +10,7 @@ import {
   ArrowUpRight,
   Briefcase,
   Braces,
+  CircleDot,
   Code2,
   Download,
   Linkedin,
@@ -21,7 +22,6 @@ import {
   ServerCog,
   ShieldCheck,
   Smartphone,
-  Sparkles,
   TestTube2,
   Gauge,
 } from 'lucide-react'
@@ -40,22 +40,22 @@ const skillGroups = [
   {
     icon: ServerCog,
     title: 'Backend',
-    skills: ['Python', 'Flask', 'PHP fundamentals', 'REST APIs'],
+    skills: ['Python', 'Flask', 'REST APIs'],
   },
   {
     icon: Braces,
     title: 'Programming',
-    skills: ['Java', 'C++', 'PHP', 'Object-oriented fundamentals'],
+    skills: ['Java', 'C++', 'PHP', 'Object-oriented programming'],
   },
   {
     icon: Smartphone,
     title: 'Mobile',
-    skills: ['Dart', 'Flutter', 'Kotlin basics'],
+    skills: ['Dart', 'Flutter', 'Kotlin'],
   },
   {
     icon: Layers3,
     title: 'Data & tools',
-    skills: ['MySQL basics', 'Git', 'GitHub', 'VS Code', 'npm', 'AI Coding Assistants'],
+    skills: ['MySQL', 'Git', 'GitHub', 'VS Code', 'npm', 'AI-assisted development'],
   },
   {
     icon: TestTube2,
@@ -65,12 +65,12 @@ const skillGroups = [
   {
     icon: ShieldCheck,
     title: 'Deployment & security',
-    skills: ['Vercel', 'Flask deployment', 'CSP', 'HSTS', 'Security headers', 'Environment configuration'],
+    skills: ['Vercel', 'Flask deployment', 'CSP', 'HSTS'],
   },
   {
     icon: Gauge,
     title: 'Performance',
-    skills: ['WebP optimization', 'Mobile-first layout'],
+    skills: ['WebP optimization', 'Mobile optimized'],
   },
 ]
 
@@ -514,9 +514,9 @@ function App() {
                 custom={0}
                 variants={heroText}
               >
-                <Sparkles
+                <CircleDot
                   size={14}
-                  className="animate-pulse"
+                  className="hero-status-icon"
                 />
 
                 Available for opportunities
@@ -1074,7 +1074,7 @@ function App() {
           id="contact"
           eyebrow="06 / Contact"
           title="Contact"
-          intro="Have an internship, project, or learning opportunity in mind? I’d be glad to hear about it."
+          intro="Have an internship, project, or learning opportunity in mind? I&apos;d be glad to hear about it."
         >
           <div className="grid gap-7 lg:grid-cols-[.7fr_1.3fr]">
             <motion.div
