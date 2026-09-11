@@ -71,8 +71,8 @@ export function ContactForm() {
       nextErrors.subject = 'Please enter a subject.'
     }
 
-    if (message.length < 10) {
-      nextErrors.message = 'Message must be at least 10 characters.'
+    if (!message) {
+      nextErrors.message = 'Please write a message.'
     }
 
     if (Object.keys(nextErrors).length > 0) {
@@ -165,7 +165,6 @@ export function ContactForm() {
           placeholder="Write your message here..."
           value={form.message}
           onChange={update}
-          minLength={10}
           maxLength={2000}
           aria-invalid={Boolean(errors.message)}
           required
